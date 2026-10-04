@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>צומחים - חינוך פיננסי לנוער</title>
+    <title>צומחים | חינוך פיננסי ושוק ההון לנוער</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="tzomchim-logo-icon.png">
+
     <!-- Google Fonts: Rubik -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- AOS (Animate On Scroll) CDN -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -19,353 +32,504 @@
                     },
                     colors: {
                         brand: {
-                            dark: '#0e4125',
-                            medium: '#155e37',
-                            light: '#e3f6ed',
-                            mint: '#d0f2e3',
+                            dark: '#06150d',
+                            card: '#0f2317',
+                            emerald: '#10b981',
+                            accent: '#00ff87',
                             orange: '#f25c2a',
-                            accent: '#10b981',
+                            purple: '#8b5cf6',
+                            cyan: '#06b6d4',
                         }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 25px rgba(0, 255, 135, 0.25)',
+                        'glow-orange': '0 0 25px rgba(242, 92, 42, 0.3)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
                     }
                 }
             }
         }
     </script>
-    <!-- Chart.js for live interactive portfolio mockup -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         body {
             font-family: 'Rubik', sans-serif;
-            background-color: #f7faf8;
-            color: #1a202c;
+            background-color: #06150d;
+            color: #f1f5f9;
+            overflow-x: hidden;
         }
-        .gradient-text-orange {
-            background: linear-gradient(135deg, #f25c2a 0%, #ff7a45 100%);
+
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: rgba(15, 35, 23, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 255, 135, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 255, 135, 0.15);
+        }
+
+        .text-gradient-orange {
+            background: linear-gradient(135deg, #ff7a45 0%, #f25c2a 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .hero-bg {
-            background: radial-gradient(circle at 20% 20%, #e2f7ed 0%, #f4fbf7 60%, #ffffff 100%);
+
+        .text-gradient-green {
+            background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .phone-shadow {
-            box-shadow: 0 25px 50px -12px rgba(14, 65, 37, 0.25);
+
+        /* Custom Range Slider */
+        input[type=range] {
+            accent-color: #00ff87;
+        }
+
+        /* Animated Grid BG */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-orange selection:text-white">
+<body class="bg-grid-pattern antialiased selection:bg-brand-orange selection:text-white">
+
+    <!-- Glowing Background Orbs -->
+    <div class="fixed top-0 right-1/4 w-96 h-96 bg-emerald-600/15 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-10 left-10 w-96 h-96 bg-orange-600/10 rounded-full blur-[160px] pointer-events-none z-0"></div>
 
     <!-- Header / Navbar -->
-    <header class="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
-        <!-- Logo -->
-        <div class="flex items-center gap-3">
-            <div class="bg-brand-medium text-white p-2.5 rounded-2xl shadow-md flex items-center justify-center">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                </svg>
-            </div>
-            <div>
-                <h1 class="text-2xl font-black text-brand-dark tracking-tight leading-none">צומחים</h1>
-                <p class="text-xs text-emerald-700 font-medium tracking-wide mt-0.5">חינוך פיננסי לנוער</p>
-            </div>
-        </div>
+    <header class="sticky top-0 z-50 glass-card border-b border-white/5 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="tzomchim-logo-white.png" alt="צומחים - חינוך פיננסי לנוער" class="h-10 sm:h-12 w-auto group-hover:scale-105 transition-transform duration-300">
+            </a>
 
-        <!-- Target Audience Badge -->
-        <div class="bg-amber-100/80 border border-amber-200 text-amber-900 font-bold px-4 py-2 rounded-full text-xs sm:text-sm flex items-center gap-2 shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-            גילאי 12–16 · 10 מפגשים
+            <!-- Target Audience Badge & Direct Action -->
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 px-4 py-1.5 rounded-full text-xs font-bold shadow-inner">
+                    <span class="w-2 h-2 rounded-full bg-brand-accent animate-ping"></span>
+                    גילאי 12–16 · 10 מפגשים מעשיים
+                </div>
+                <a href="#register" class="bg-gradient-to-r from-brand-orange to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-glow-orange transition-all hover:scale-105">
+                    הירשם עכשיו
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Hero Section -->
-    <section class="hero-bg border-y border-emerald-100/60 py-12 md:py-20 relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <!-- HERO SECTION (Text RIGHT, Mockup LEFT) -->
+    <section class="relative pt-12 pb-20 md:py-28 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <!-- Left Side / Mobile Portfolio Mockup -->
-            <div class="lg:col-span-5 flex justify-center order-2 lg:order-1 relative">
-                <!-- Decorative background elements -->
-                <div class="absolute -top-6 -right-6 w-32 h-32 bg-amber-200/50 rounded-full blur-2xl"></div>
-                <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-brand-mint/60 rounded-full blur-2xl"></div>
-
-                <!-- Phone Mockup Container -->
-                <div class="w-full max-w-[320px] bg-white border-4 border-slate-900 rounded-[40px] p-4 phone-shadow relative z-10">
-                    <!-- Phone Notch -->
-                    <div class="w-28 h-4 bg-slate-900 rounded-b-xl mx-auto mb-4"></div>
-                    
-                    <!-- App Content Header -->
-                    <div class="flex justify-between items-center text-xs text-slate-500 mb-2">
-                        <span>התיק שלי</span>
-                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-semibold">להמחשה</span>
-                    </div>
-
-                    <div class="text-xs text-slate-400 font-medium">שווי התיק</div>
-                    <div class="flex items-baseline justify-between mt-1 mb-3">
-                        <span class="text-2xl font-black text-slate-900">₪974,000</span>
-                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg flex items-center gap-1">
-                            ▲ 18.4%
-                        </span>
-                    </div>
-
-                    <!-- Mini Live Canvas Chart -->
-                    <div class="h-28 w-full mb-4">
-                        <canvas id="portfolioChart"></canvas>
-                    </div>
-
-                    <!-- Portfolio Breakdown List -->
-                    <div class="space-y-2 text-xs">
-                        <div class="text-slate-400 font-semibold mb-1">הפוזיציות שלי</div>
-                        
-                        <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 border border-slate-100">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
-                                <span class="font-bold text-slate-700">S&P 500</span>
-                            </div>
-                            <span class="font-bold text-purple-700">40%</span>
-                        </div>
-
-                        <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 border border-slate-100">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
-                                <span class="font-bold text-slate-700">NASDAQ 100</span>
-                            </div>
-                            <span class="font-bold text-teal-600">25%</span>
-                        </div>
-
-                        <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 border border-slate-100">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
-                                <span class="font-bold text-slate-700">ת"א 125</span>
-                            </div>
-                            <span class="font-bold text-sky-600">20%</span>
-                        </div>
-
-                        <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 border border-slate-100">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                                <span class="font-bold text-slate-700">אג"ח ממשלתי</span>
-                            </div>
-                            <span class="font-bold text-amber-600">15%</span>
-                        </div>
-                    </div>
+            <!-- RIGHT SIDE: Headline, Description & CTAs (RTL Position 1) -->
+            <div class="lg:col-span-7 text-right space-y-6 z-10" data-aos="fade-left" data-aos-duration="1000">
+                <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-2xl text-xs font-semibold text-emerald-400 backdrop-blur-md">
+                    <span>🔥</span>
+                    <span>קורס שוק ההון שמדבר בשפה של דור ה-Z</span>
                 </div>
-            </div>
 
-            <!-- Right Side / Headline & Copy -->
-            <div class="lg:col-span-7 text-center lg:text-right order-1 lg:order-2 space-y-6">
-                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-dark leading-[1.15] tracking-tight">
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tight">
                     תגרמו לכסף שלכם<br>
-                    <span class="gradient-text-orange inline-block mt-1">לעבוד במקומכם.</span>
-                </h2>
-                
-                <p class="text-lg sm:text-xl text-slate-600 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                    קורס שוק ההון שמדבר בשפה של בני נוער: גרפים חיים, נתוני אמת וסימולציות.
+                    <span class="text-gradient-orange">לעבוד במקומכם.</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl">
+                    בלי נוסחאות מורכבות ובלי סיסמאות באוויר. קורס פרקטי שמשלב סימולטורים חיים, ניתוחי מניות בזמן אמת, וליגת תיקי דמה ללא סיכון כספי![cite: 1]
                 </p>
 
-                <!-- Instructors Highlight Box -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-lg shadow-slate-100 max-w-xl mx-auto lg:mx-0 flex flex-col sm:flex-row items-center gap-4 text-right">
+                <!-- Instructors Highlight Banner -->
+                <div class="glass-card p-4 rounded-2xl border border-white/10 max-w-xl flex items-center gap-4">
                     <div class="flex -space-x-3 space-x-reverse shrink-0">
-                        <div class="w-14 h-14 rounded-full border-2 border-white shadow bg-emerald-800 text-white flex items-center justify-center font-bold text-lg">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-600 to-emerald-400 border-2 border-emerald-950 flex items-center justify-center font-black text-white text-base shadow-md">
                             י
                         </div>
-                        <div class="w-14 h-14 rounded-full border-2 border-white shadow bg-brand-orange text-white flex items-center justify-center font-bold text-lg">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-orange-600 to-orange-400 border-2 border-emerald-950 flex items-center justify-center font-black text-white text-base shadow-md">
                             א
                         </div>
                     </div>
-                    <div>
-                        <h3 class="font-black text-slate-900 text-base">
-                            יאיר (19) ואריה (17) · צעירים. מנוסים. בדיוק כמוכם.
-                        </h3>
-                        <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-snug">
-                            מעל 4 שנות ניסיון בשוק ההון. כל תלמיד יוצא מהקורס עם תיק השקעות אישי שבנה בעצמו.
-                        </p>
+                    <div class="text-xs sm:text-sm">
+                        <p class="font-bold text-white">יאיר הלל (19) ואריה זגדנסקי (17)</p>
+                        <p class="text-slate-400">מעל 4 שנות ניסיון מעשי בשוק ההון · בגובה העיניים[cite: 1]</p>
                     </div>
                 </div>
 
-                <!-- CTA Quick Action -->
-                <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-4">
-                    <a href="#register" class="bg-brand-orange hover:bg-orange-600 text-white font-black text-lg px-8 py-4 rounded-2xl shadow-lg shadow-orange-500/25 transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2">
-                        <span>נרשמים עכשיו לקבוצה הראשונה</span>
+                <!-- CTA Action Buttons -->
+                <div class="pt-4 flex flex-wrap gap-4 items-center">
+                    <a href="#register" class="bg-gradient-to-r from-brand-orange to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-black text-base sm:text-lg px-8 py-4 rounded-2xl shadow-glow-orange transition-all hover:scale-105 active:scale-95 flex items-center gap-3">
+                        <span>שריון מקום בקבוצה הקרובה</span>
                         <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </a>
+                    <a href="#simulator" class="glass-card hover:bg-white/10 text-slate-200 font-bold text-base px-6 py-4 rounded-2xl transition-all border border-white/10 hover:border-brand-accent/50 flex items-center gap-2">
+                        <span>🎮 התחרות נגד הזמן</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- LEFT SIDE: Phone Mockup / Live App Canvas (RTL Position 2) -->
+            <div class="lg:col-span-5 flex justify-center z-10" data-aos="fade-right" data-aos-duration="1000">
+                <div class="relative w-full max-w-[340px]">
+                    
+                    <!-- Glow Behind Phone -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-accent to-emerald-600 opacity-20 blur-3xl rounded-full"></div>
+
+                    <!-- Floating Badge Top Left -->
+                    <div class="absolute -top-4 -left-6 z-20 glass-card border border-emerald-500/40 px-3.5 py-2 rounded-2xl shadow-neon flex items-center gap-2 animate-bounce">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-accent"></span>
+                        <span class="text-xs font-bold text-emerald-300">תשואה +18.4% 📈</span>
+                    </div>
+
+                    <!-- Phone Frame -->
+                    <div class="glass-card bg-slate-950/80 border-4 border-slate-800 rounded-[45px] p-5 shadow-2xl relative z-10 overflow-hidden">
+                        
+                        <!-- Phone Speaker Notch -->
+                        <div class="w-24 h-4 bg-slate-800 rounded-b-xl mx-auto mb-5"></div>
+
+                        <div class="flex justify-between items-center mb-3 text-xs">
+                            <span class="text-slate-400 font-bold">תיק השקעות דמה</span>
+                            <span class="bg-emerald-500/20 text-brand-accent px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/30">למידה מעשית</span>
+                        </div>
+
+                        <div class="text-xs text-slate-400">שווי התיק הדמיוני</div>
+                        <div class="flex items-baseline justify-between mt-1 mb-4">
+                            <span class="text-3xl font-black text-white tracking-tight">₪974,000</span>
+                            <span class="text-xs font-black text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-xl">
+                                ▲ 18.4%
+                            </span>
+                        </div>
+
+                        <!-- Live Interactive Canvas Chart inside Mockup -->
+                        <div class="h-32 w-full mb-4">
+                            <canvas id="heroMockupChart"></canvas>
+                        </div>
+
+                        <!-- Asset Distribution -->
+                        <div class="space-y-2 text-xs">
+                            <div class="text-slate-400 font-bold mb-1">חלוקת התיק</div>
+                            
+                            <div class="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-sm"></span>
+                                    <span class="font-bold text-slate-200">S&P 500</span>
+                                </div>
+                                <span class="font-black text-purple-400">40%</span>
+                            </div>
+
+                            <div class="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-teal-400 shadow-sm"></span>
+                                    <span class="font-bold text-slate-200">NASDAQ 100</span>
+                                </div>
+                                <span class="font-black text-teal-300">25%</span>
+                            </div>
+
+                            <div class="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-sm"></span>
+                                    <span class="font-bold text-slate-200">ת"א 125</span>
+                                </div>
+                                <span class="font-black text-sky-400">20%</span>
+                            </div>
+
+                            <div class="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm"></span>
+                                    <span class="font-bold text-slate-200">אג"ח ממשלתי</span>
+                                </div>
+                                <span class="font-black text-amber-400">15%</span>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- Instructors Section (מי אנחנו?) -->
-    <section class="max-w-6xl mx-auto px-4 py-16 sm:py-20 border-b border-slate-200/60">
-        <div class="text-center mb-12 sm:mb-16">
-            <span class="text-emerald-700 font-bold text-sm tracking-wider uppercase bg-emerald-100/80 px-3 py-1 rounded-full">הצוות המוביל</span>
-            <h2 class="text-3xl sm:text-4xl font-black text-brand-dark mt-3">מי מעביר את הקורס?</h2>
-            <p class="text-slate-500 text-sm sm:text-base mt-2">מדריכים שמדברים בשפה של התלמידים, בגובה העיניים ועם ניסיון מעשי בשטח</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+    <!-- INTERACTIVE SECTION: "תחרות נגד הזמן" (Compound Interest Simulator) -->
+    <section id="simulator" class="py-20 relative">
+        <div class="max-w-6xl mx-auto px-6">
             
-            <!-- Card 1: Yair Hilell -->
-            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-md hover:shadow-xl transition-all relative overflow-hidden flex flex-col justify-between">
-                <div class="absolute top-0 right-0 w-2 h-full bg-emerald-600"></div>
-                <div>
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-16 h-16 rounded-2xl bg-emerald-800 text-white font-black text-2xl flex items-center justify-center shadow-lg shadow-emerald-900/20 shrink-0">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="bg-emerald-500/10 border border-emerald-500/30 text-brand-accent font-bold text-xs uppercase px-4 py-1.5 rounded-full">
+                    סימולטור אינטראקטיבי
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black text-white mt-4">
+                    תחרות נגד הזמן ⏱️
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg mt-3">
+                    שחקו עם הנתונים וגלו מה קורה למי שמתחיל להשקיע בגיל 15 לעומת מי שממתין רק 5 שנים עד גיל 20!
+                </p>
+            </div>
+
+            <!-- Interactive Calculator Container -->
+            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" data-aos="zoom-in">
+                
+                <!-- Sliders Control Panel -->
+                <div class="lg:col-span-5 space-y-6 text-right">
+                    
+                    <!-- Slider 1: Monthly Deposit -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-sm font-bold">
+                            <span class="text-slate-300">הפקדה חודשית:</span>
+                            <span class="text-brand-accent text-lg font-black" id="monthlyVal">₪500</span>
+                        </div>
+                        <input type="range" id="monthlyInput" min="100" max="2000" step="100" value="500" class="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                    </div>
+
+                    <!-- Slider 2: Average Annual Return -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-sm font-bold">
+                            <span class="text-slate-300">תשואה שנתית ממוצעת:</span>
+                            <span class="text-brand-accent text-lg font-black" id="returnVal">9%</span>
+                        </div>
+                        <input type="range" id="returnInput" min="4" max="14" step="0.5" value="9" class="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                    </div>
+
+                    <!-- Summary Comparison Cards -->
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 text-right">
+                            <span class="text-[11px] font-bold text-emerald-400 block">התחלה בגיל 15 (בגיל 50)</span>
+                            <span class="text-xl sm:text-2xl font-black text-white block mt-1" id="earlyTotal">₪1,340,000</span>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-orange-950/40 border border-orange-500/30 text-right">
+                            <span class="text-[11px] font-bold text-orange-400 block">המתנה לגיל 20 (בגיל 50)</span>
+                            <span class="text-xl sm:text-2xl font-black text-slate-300 block mt-1" id="lateTotal">₪820,000</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
+                        💡 <strong>המסקנה:</strong> המתנה של 5 שנים בלבד עלולה לעלות בלמעלה מ-500,000 ₪ של תשואה בגלל אפקט הריבית דריבית!
+                    </div>
+
+                </div>
+
+                <!-- Dynamic Chart Canvas -->
+                <div class="lg:col-span-7 h-72 sm:h-96 w-full">
+                    <canvas id="timeRaceChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- DETAILED COURSE SYLLABUS / MODULES (תכני הקורס) -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="bg-orange-500/10 border border-orange-500/30 text-brand-orange font-bold text-xs uppercase px-4 py-1.5 rounded-full">
+                    המסלול המלא
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black text-white mt-4">
+                    מה לומדים ב-10 המפגשים? 📚
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg mt-3">
+                    בלי דברים יבשים. כל מפגש בנוי מחומר תיאורטי קצר ותרגול מעשי על גרפים חיים[cite: 1, 2].
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Module 1 -->
+                <div class="glass-card glass-card-hover p-8 rounded-3xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800">מפגשים 1–2</span>
+                    <h3 class="text-2xl font-black text-white mt-3 mb-2">הזמן הוא הכוח שלכם</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        איך עובדת הבורסה? כוחה הנסתר של הריבית דריבית, אסטרטגיית DCA (השקעה עקבית), ומה ההבדל בין חיסכון בבנק להשקעה במדד S&P 500[cite: 2].
+                    </p>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="glass-card glass-card-hover p-8 rounded-3xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-4">📊</div>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800">מפגשים 3–4</span>
+                    <h3 class="text-2xl font-black text-white mt-3 mb-2">מה קונים בבורסה?</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        הבנת העולם של מניות, קרנות סל (ETFs), אג"ח ממשלתי וקונצרני, ואיך עובד מנגנון הדיבידנדים[cite: 2].
+                    </p>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="glass-card glass-card-hover p-8 rounded-3xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <span class="text-xs font-bold text-orange-400 bg-orange-950/80 px-3 py-1 rounded-full border border-orange-800">מפגשים 5–6</span>
+                    <h3 class="text-2xl font-black text-white mt-3 mb-2">הראש של המשקיע</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        פסיכולוגיית מסחר, התמודדות עם משברים בשווקים, פיזור סיכונים נכון והימנעות מהטיות קוגניטיביות שמפסידות כסף[cite: 2].
+                    </p>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="glass-card glass-card-hover p-8 rounded-3xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl mb-4">🌍</div>
+                    <span class="text-xs font-bold text-orange-400 bg-orange-950/80 px-3 py-1 rounded-full border border-orange-800">מפגשים 7–8</span>
+                    <h3 class="text-2xl font-black text-white mt-3 mb-2">נתוני מאקרו ודוחות</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        איך קוראים דוח כספי של חברה? הבנת מדד המחירים לצרכן (CPI), האינפלציה, שער הדולר ומכפיל רווח (P/E)[cite: 2].
+                    </p>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="glass-card glass-card-hover p-8 rounded-3xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-4xl mb-4">📈</div>
+                    <span class="text-xs font-bold text-brand-accent bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800">מפגש 9</span>
+                    <h3 class="text-2xl font-black text-white mt-3 mb-2">ניתוח טכני בסיסי</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        שימוש מקצועי ב-TradingView, קריאת נרות יפניים, זיהוי מגמות, קווי תמיכה והתנגדות ונפח מסחר (Volume)[cite: 2].
+                    </p>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="glass-card glass-card-hover p-8 rounded-3xl relative overflow-hidden bg-gradient-to-br from-emerald-950/60 to-slate-900 border-emerald-500/40" data-aos="fade-up" data-aos-delay="600">
+                    <div class="text-4xl mb-4">🛡️</div>
+                    <span class="text-xs font-bold text-brand-accent bg-emerald-950 px-3 py-1 rounded-full border border-emerald-500">מפגש 10</span>
+                    <h3 class="text-2xl font-black text-white mt-3 mb-2">משקיעים בפועל והגנה</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        הכרת עמלות, פקודות Limit/Stop-Loss, זיהוי עוקצים והונאות ברשתות החברתיות, וסיום ליגת תיקי הדמה![cite: 1, 2]
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INSTRUCTORS SECTION (מי אנחנו?) -->
+    <section class="py-20 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="bg-emerald-500/10 border border-emerald-500/30 text-brand-accent font-bold text-xs uppercase px-4 py-1.5 rounded-full">
+                    הצוות המוביל
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black text-white mt-4">
+                    מי מעביר את הקורס?
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg mt-3">
+                    מדריכים קרובים בגיל לתלמידים, שמדברים בשפה שלהם וחיים את השוק יום-יום[cite: 1].
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- Yair Hilell -->
+                <div class="glass-card p-8 rounded-3xl border border-white/10 hover:border-emerald-500/40 transition-all text-right relative overflow-hidden" data-aos="fade-left">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-emerald-500"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-800 text-white font-black text-2xl flex items-center justify-center shadow-neon shrink-0">
                             י
                         </div>
                         <div>
-                            <h3 class="text-2xl font-black text-slate-900">יאיר הלל</h3>
-                            <span class="inline-block bg-emerald-50 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-lg border border-emerald-100 mt-1">
-                                בן 19 · מדריך ראשי
+                            <h3 class="text-2xl font-black text-white">יאיר הלל</h3>
+                            <span class="inline-block bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1 rounded-lg border border-emerald-500/30 mt-1">
+                                בן 19 · סוחר ומשקיע בשוק ההון
                             </span>
                         </div>
                     </div>
-                    <p class="text-slate-600 text-sm leading-relaxed space-y-2">
-                        בוגר הישיבה התיכונית חספין ותלמיד מכינה קדם-צבאית. 
-                        סוחר ומשקיע בשוק ההון מעל 4 שנים, עם התמחות מיוחדת במסחר סווינג ואינדיקטורים טכניים.
-                        מביא איתו תשוקה ענקית להנגשת עולם ההשקעות לבני נוער בצורה פשוטה, חווייתית ובגובה העיניים.
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        בוגר הישיבה התיכונית חספין ותלמיד מכינה קדם-צבאית. סוחר פעיל בשוק ההון מעל 4 שנים, מתמחה במסחר סווינג, אינדיקטורים טכניים וקריאת גרפים ב-TradingView[cite: 2]. מביא איתו תשוקה ענקית לחינוך פיננסי מעשי לנוער[cite: 1].
                     </p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-medium">
-                    <span>עולם תוכן: ניתוח טכני וסווינג</span>
-                    <span class="text-emerald-600 font-bold">4+ שנות ניסיון</span>
-                </div>
-            </div>
 
-            <!-- Card 2: Aryeh Zagdanski -->
-            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-md hover:shadow-xl transition-all relative overflow-hidden flex flex-col justify-between">
-                <div class="absolute top-0 right-0 w-2 h-full bg-brand-orange"></div>
-                <div>
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-16 h-16 rounded-2xl bg-brand-orange text-white font-black text-2xl flex items-center justify-center shadow-lg shadow-orange-500/20 shrink-0">
+                <!-- Aryeh Zagdanski -->
+                <div class="glass-card p-8 rounded-3xl border border-white/10 hover:border-orange-500/40 transition-all text-right relative overflow-hidden" data-aos="fade-right">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-brand-orange"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-700 text-white font-black text-2xl flex items-center justify-center shadow-glow-orange shrink-0">
                             א
                         </div>
                         <div>
-                            <h3 class="text-2xl font-black text-slate-900">אריה זגדנסקי</h3>
-                            <span class="inline-block bg-orange-50 text-brand-orange text-xs font-bold px-2.5 py-1 rounded-lg border border-orange-100 mt-1">
-                                בן 17 · מדריך ראשי
+                            <h3 class="text-2xl font-black text-white">אריה זגדנסקי</h3>
+                            <span class="inline-block bg-orange-500/20 text-orange-300 text-xs font-bold px-3 py-1 rounded-lg border border-orange-500/30 mt-1">
+                                בן 17 · חוקר כלכלה ומאקרו
                             </span>
                         </div>
                     </div>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        סוחר ומשקיע בשוק ההון מעל 4 שנים, חי ונושם את עולם הכלכלה, המאקרו וההשקעות לטווח ארוך. 
-                        מתמחה בבניית תיקי השקעות, הבנת מדדים עולמיים וחינוך פיננסי מעשי לבני נוער בגובה העיניים.
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        סוחר ומשקיע בשוק ההון מעל 4 שנים[cite: 1]. מתמחה בניתוח נתוני מאקרו-כלכלה, השקעות ארוכות טווח, בניית תיקי השקעות מפוזרים והבנת מדדים עולמיים[cite: 1, 2].
                     </p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-medium">
-                    <span>עולם תוכן: השקעות מאקרו ומדדים</span>
-                    <span class="text-brand-orange font-bold">4+ שנות ניסיון</span>
-                </div>
+
             </div>
 
         </div>
     </section>
 
-    <!-- Timeline Roadmap Section -->
-    <section class="max-w-6xl mx-auto px-4 py-16 sm:py-24">
-        <div class="text-center mb-12 sm:mb-16">
-            <span class="text-brand-orange font-bold text-sm tracking-wider uppercase bg-orange-50 px-3 py-1 rounded-full">סילבוס הקורס</span>
-            <h2 class="text-3xl sm:text-4xl font-black text-brand-dark mt-3">מה לומדים במסלול?</h2>
-            <p class="text-slate-500 text-sm sm:text-base mt-2">מסע מעשי צעד אחר צעד מהיסודות ועד לתיק השקעות פעיל</p>
-        </div>
-
-        <div class="relative">
-            <!-- Connecting Line -->
-            <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-emerald-200 via-brand-orange/40 to-emerald-200 -translate-y-1/2 z-0"></div>
-
-            <div class="grid grid-cols-1 md:grid-cols-6 gap-6 relative z-10">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm text-center flex flex-col items-center hover:shadow-md transition-all group">
-                    <div class="w-10 h-10 rounded-full bg-brand-orange text-white font-black flex items-center justify-center text-sm shadow-md mb-3 group-hover:scale-110 transition-transform">1</div>
-                    <h4 class="font-bold text-slate-800 text-sm leading-tight">בורסה, מדדים וריבית דריבית</h4>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm text-center flex flex-col items-center hover:shadow-md transition-all group">
-                    <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center text-sm shadow-md mb-3 group-hover:scale-110 transition-transform">2</div>
-                    <h4 class="font-bold text-slate-800 text-sm leading-tight">מניות, אג"ח וקרנות סל</h4>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm text-center flex flex-col items-center hover:shadow-md transition-all group">
-                    <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center text-sm shadow-md mb-3 group-hover:scale-110 transition-transform">3</div>
-                    <h4 class="font-bold text-slate-800 text-sm leading-tight">סיכון ופסיכולוגיה</h4>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm text-center flex flex-col items-center hover:shadow-md transition-all group">
-                    <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center text-sm shadow-md mb-3 group-hover:scale-110 transition-transform">4</div>
-                    <h4 class="font-bold text-slate-800 text-sm leading-tight">מאקרו וקריאת דוחות</h4>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm text-center flex flex-col items-center hover:shadow-md transition-all group">
-                    <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center text-sm shadow-md mb-3 group-hover:scale-110 transition-transform">5</div>
-                    <h4 class="font-bold text-slate-800 text-sm leading-tight">איך משקיעים בפועל</h4>
-                </div>
-
-                <div class="bg-emerald-900 text-white p-5 rounded-2xl shadow-lg text-center flex flex-col items-center hover:shadow-xl transition-all group">
-                    <div class="w-10 h-10 rounded-full bg-brand-orange text-white font-black flex items-center justify-center text-sm shadow-md mb-3 group-hover:scale-110 transition-transform">6</div>
-                    <h4 class="font-bold text-emerald-100 text-sm leading-tight">יוצאים עם תיק השקעות</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bottom Registration Banner / Footer -->
-    <footer id="register" class="bg-brand-dark text-white py-12 sm:py-16">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="bg-emerald-950/80 border border-emerald-800/80 rounded-3xl p-8 sm:p-12 text-center md:text-right grid grid-cols-1 md:grid-cols-12 gap-8 items-center shadow-2xl">
+    <!-- FOOTER / REGISTRATION SECTION -->
+    <footer id="register" class="py-16 relative border-t border-white/10 bg-slate-950/80">
+        <div class="max-w-5xl mx-auto px-6 text-center md:text-right">
+            
+            <div class="glass-card bg-gradient-to-br from-emerald-950/80 via-slate-900 to-slate-950 p-8 sm:p-12 rounded-3xl border border-emerald-500/30 shadow-2xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center" data-aos="zoom-in">
                 
-                <!-- Registration Info Left/Main -->
                 <div class="md:col-span-8 space-y-4">
-                    <span class="inline-block bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        הרשמה מוקדמת בעיצומה
-                    </span>
-                    <h3 class="text-3xl sm:text-4xl font-black leading-tight text-white">
-                        נרשמים עכשיו לקבוצה הראשונה
+                    <img src="tzomchim-logo-white.png" alt="צומחים" class="h-12 w-auto mb-2 mx-auto md:mx-0">
+                    <h3 class="text-3xl sm:text-5xl font-black text-white leading-tight">
+                        רוצים להצטרף לתוכנית "צומחים"?
                     </h3>
-                    <p class="text-emerald-200 text-base sm:text-lg flex flex-wrap items-center justify-center md:justify-start gap-4">
-                        <span class="flex items-center gap-1.5">
-                            📅 פתיחה: <strong>15.10.2026</strong>
-                        </span>
-                        <span class="hidden sm:inline">·</span>
-                        <span class="flex items-center gap-1.5">
-                            📍 <strong>חספין, מרכז חדשנות</strong>
-                        </span>
+                    <p class="text-slate-300 text-base sm:text-lg">
+                        📍 <strong>חספין, מרכז חדשנות</strong> · פתיחה: <strong>15.10.2026</strong>[cite: 1]
                     </p>
                 </div>
 
-                <!-- Contact & WhatsApp Buttons Right -->
-                <div class="md:col-span-4 flex flex-col gap-3 justify-center">
-                    <a href="https://wa.me/972584272333" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-2xl text-center flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-102">
+                <div class="md:col-span-4 flex flex-col gap-3">
+                    <a href="https://wa.me/972584272333" target="_blank" class="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black py-4 px-6 rounded-2xl text-center flex items-center justify-center gap-2 shadow-neon transition-all hover:scale-105">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                        <span>058-4272333 (יאיר)</span>
+                        <span>דברו עם יאיר: 058-4272333</span>[cite: 2]
                     </a>
 
-                    <a href="https://wa.me/972553184575" target="_blank" class="bg-emerald-800 hover:bg-emerald-700 text-emerald-100 font-bold py-3.5 px-6 rounded-2xl text-center flex items-center justify-center gap-2 transition-all">
+                    <a href="https://wa.me/972553184575" target="_blank" class="glass-card hover:bg-white/10 text-slate-200 font-bold py-4 px-6 rounded-2xl text-center flex items-center justify-center gap-2 border border-white/10 transition-all">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                        <span>055-3184575 (אריה)</span>
+                        <span>דברו עם אריה: 055-3184575</span>[cite: 2]
                     </a>
                 </div>
 
             </div>
 
-            <div class="text-center text-xs text-emerald-400/60 mt-8">
-                © 2026 צומחים - חינוך פיננסי ושוק ההון לנוער. כל הזכויות שמורות.
+            <div class="text-center text-xs text-slate-500 mt-8">
+                © 2026 צומחים - חינוך פיננסי ושוק ההון לנוער. התוכנית הינה לצרכים חינוכיים בלבד ואינה מהווה ייעוץ השקעות[cite: 2].
             </div>
+
         </div>
     </footer>
 
-    <!-- Chart.js Setup Script -->
+    <!-- SCRIPTS -->
     <script>
-        const ctx = document.getElementById('portfolioChart').getContext('2d');
-        const gradient = ctx.createLinearGradient(0, 0, 0, 100);
-        gradient.addColorStop(0, 'rgba(16, 185, 129, 0.4)');
-        gradient.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
 
-        new Chart(ctx, {
+        // 1. Hero Mockup Chart
+        const heroCtx = document.getElementById('heroMockupChart').getContext('2d');
+        const heroGradient = heroCtx.createLinearGradient(0, 0, 0, 120);
+        heroGradient.addColorStop(0, 'rgba(0, 255, 135, 0.4)');
+        heroGradient.addColorStop(1, 'rgba(0, 255, 135, 0.0)');
+
+        new Chart(heroCtx, {
             type: 'line',
             data: {
-                labels: ['ינו', 'פבר', 'מרץ', 'אפר', 'מאי', 'יוני', 'יולי'],
+                labels: ['1', '2', '3', '4', '5', '6', '7'],
                 datasets: [{
                     data: [820000, 840000, 830000, 890000, 880000, 930000, 974000],
-                    borderColor: '#10b981',
+                    borderColor: '#00ff87',
                     borderWidth: 3,
                     fill: true,
-                    backgroundColor: gradient,
+                    backgroundColor: heroGradient,
                     tension: 0.4,
                     pointRadius: 0
                 }]
@@ -374,12 +538,122 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+
+        // 2. Interactive "Time Race" Simulator Logic
+        const monthlyInput = document.getElementById('monthlyInput');
+        const returnInput = document.getElementById('returnInput');
+        const monthlyVal = document.getElementById('monthlyVal');
+        const returnVal = document.getElementById('returnVal');
+        const earlyTotal = document.getElementById('earlyTotal');
+        const lateTotal = document.getElementById('lateTotal');
+
+        const raceCtx = document.getElementById('timeRaceChart').getContext('2d');
+
+        let raceChart = new Chart(raceCtx, {
+            type: 'line',
+            data: { labels: [], datasets: [] },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { intersect: false, mode: 'index' },
+                plugins: {
+                    legend: {
+                        labels: { color: '#cbd5e1', font: { family: 'Rubik', size: 12 } }
+                    }
+                },
                 scales: {
-                    x: { display: false },
-                    y: { display: false }
+                    x: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#94a3b8', font: { family: 'Rubik' } }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: {
+                            color: '#94a3b8',
+                            font: { family: 'Rubik' },
+                            callback: value => '₪' + (value / 1000).toLocaleString() + 'k'
+                        }
+                    }
                 }
             }
         });
+
+        function calculateCompoundInterest() {
+            const P = parseFloat(monthlyInput.value);
+            const annualRate = parseFloat(returnInput.value) / 100;
+            const monthlyRate = annualRate / 12;
+
+            monthlyVal.innerText = '₪' + P.toLocaleString();
+            returnVal.innerText = (annualRate * 100).toFixed(1) + '%';
+
+            let labels = [];
+            let earlyData = [];
+            let lateData = [];
+
+            let totalEarly = 0;
+            let totalLate = 0;
+
+            for (let age = 15; age <= 50; age++) {
+                labels.push('גיל ' + age);
+
+                let monthsEarly = (age - 15) * 12;
+                if (monthsEarly === 0) {
+                    totalEarly = 0;
+                } else {
+                    totalEarly = P * ((Math.pow(1 + monthlyRate, monthsEarly) - 1) / monthlyRate);
+                }
+                earlyData.push(Math.round(totalEarly));
+
+                if (age < 20) {
+                    lateData.push(0);
+                } else {
+                    let monthsLate = (age - 20) * 12;
+                    if (monthsLate === 0) {
+                        totalLate = 0;
+                    } else {
+                        totalLate = P * ((Math.pow(1 + monthlyRate, monthsLate) - 1) / monthlyRate);
+                    }
+                    lateData.push(Math.round(totalLate));
+                }
+            }
+
+            earlyTotal.innerText = '₪' + Math.round(totalEarly).toLocaleString();
+            lateTotal.innerText = '₪' + Math.round(totalLate).toLocaleString();
+
+            raceChart.data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'התחלה בגיל 15 (הדרך שלכם במחזור הקרוב)',
+                        data: earlyData,
+                        borderColor: '#00ff87',
+                        backgroundColor: 'rgba(0, 255, 135, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'המתנה לגיל 20 (דחייה של 5 שנים בלבד)',
+                        data: lateData,
+                        borderColor: '#f25c2a',
+                        backgroundColor: 'rgba(242, 92, 42, 0.1)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        fill: false,
+                        tension: 0.3
+                    }
+                ]
+            };
+            raceChart.update();
+        }
+
+        monthlyInput.addEventListener('input', calculateCompoundInterest);
+        returnInput.addEventListener('input', calculateCompoundInterest);
+
+        calculateCompoundInterest();
     </script>
 </body>
 </html>
