@@ -2,12 +2,13 @@ import { useMemo, useState } from 'react';
 import { ils } from '../data.js';
 
 const END = 65;
+const MIN_AGE = 16;
 
 function series(monthly, startAge, rate) {
   const r = rate / 100 / 12;
   const pts = [];
   let v = 0, dep = 0;
-  for (let age = 12; age <= END; age++) {
+  for (let age = MIN_AGE; age <= END; age++) {
     if (age >= startAge) {
       for (let m = 0; m < 12; m++) { v = v * (1 + r) + monthly; dep += monthly; }
     }
@@ -33,10 +34,10 @@ function Chart({ a, b, startAge, delay }) {
   const W = 640, H = 300, pl = 58, pr = 16, pt = 18, pb = 34;
   const max = Math.max(...a.map((p) => p.v), 1);
   const nice = (() => { const e = Math.pow(10, Math.floor(Math.log10(max))); const f = max / e; return (f <= 2 ? 2 : f <= 5 ? 5 : 10) * e; })();
-  const x = (age) => pl + ((age - 12) / (END - 12)) * (W - pl - pr);
+  const x = (age) => pl + ((age - MIN_AGE) / (END - MIN_AGE)) * (W - pl - pr);
   const y = (v) => pt + (1 - v / nice) * (H - pt - pb);
   const path = (s, key) => s.map((p, i) => `${i ? 'L' : 'M'}${x(p.age).toFixed(1)} ${y(p[key]).toFixed(1)}`).join(' ');
-  const area = (s) => `${path(s, 'v')} L${x(END)} ${y(0)} L${x(12)} ${y(0)} Z`;
+  const area = (s) => `${path(s, 'v')} L${x(END)} ${y(0)} L${x(MIN_AGE)} ${y(0)} Z`;
   const ticks = [0, 0.25, 0.5, 0.75, 1].map((k) => k * nice);
   const fmt = (v) => (v >= 1e6 ? `${(v / 1e6).toFixed(v % 1e6 ? 1 : 0)}M` : v >= 1e3 ? `${Math.round(v / 1e3)}K` : `${v}`);
   return (
@@ -51,7 +52,7 @@ function Chart({ a, b, startAge, delay }) {
           <text x={pl - 10} y={y(t) + 4} textAnchor="end" fontSize="12" fill="#6B6358" fontFamily="JetBrains Mono, monospace">₪{fmt(t)}</text>
         </g>
       ))}
-      {[12, 20, 30, 40, 50, 65].map((g) => (
+      {[16, 20, 30, 40, 50, 65].map((g) => (
         <text key={g} x={x(g)} y={H - 10} textAnchor="middle" fontSize="12" fill="#6B6358" fontFamily="Heebo, sans-serif">{g}</text>
       ))}
       <path d={area(a)} fill="url(#ga)" />
@@ -75,7 +76,7 @@ const PRESETS = [
 
 export default function Simulator() {
   const [monthly, setMonthly] = useState(200);
-  const [startAge, setStartAge] = useState(15);
+  const [startAge, setStartAge] = useState(17);
   const [rate, setRate] = useState(7);
   const delay = 10;
   const a = useMemo(() => series(monthly, startAge, rate), [monthly, startAge, rate]);
@@ -105,7 +106,7 @@ export default function Simulator() {
               ))}
             </div>
             <Slider id="s-monthly" label="השקעה חודשית" value={monthly} min={20} max={2000} step={10} onChange={setMonthly} format={(v) => `₪${v.toLocaleString('en-US')}`} />
-            <Slider id="s-age" label="מתחילים בגיל" value={startAge} min={12} max={45} step={1} onChange={setStartAge} format={(v) => `${v}`} />
+            <Slider id="s-age" label="מתחילים בגיל" value={startAge} min={16} max={45} step={1} onChange={setStartAge} format={(v) => `${v}`} />
             <Slider id="s-rate" label="תשואה שנתית ממוצעת" value={rate} min={2} max={10} step={0.5} onChange={setRate} format={(v) => `${v}%`} />
             <p className="text-xs text-muted leading-relaxed">המחשה חינוכית בלבד: ריבית מחושבת חודשית בתשואה קבועה, לפני מס, עמלות ואינפלציה. תשואות עבר אינן מבטיחות תשואות עתידיות ואין לראות בכך ייעוץ השקעות.</p>
           </div>

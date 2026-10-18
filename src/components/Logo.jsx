@@ -17,7 +17,7 @@ export default function Logo({ size = 40, light = false }) {
       <LogoMark size={size} light={light} />
       <span className="flex flex-col leading-none">
         <span className={`font-display font-extrabold ${light ? 'text-cream' : 'text-forest'}`} style={{ fontSize: size * 0.62 }}>צומחים</span>
-        <span className={`${light ? 'text-mint' : 'text-muted'} mt-1`} style={{ fontSize: Math.max(11, size * 0.27) }}>חינוך פיננסי לנוער</span>
+        <span className={`${light ? 'text-mint' : 'text-muted'} mt-1`} style={{ fontSize: Math.max(11, size * 0.27) }}>שוק ההון בגובה העיניים</span>
       </span>
     </span>
   );
