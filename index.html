@@ -1,638 +1,76 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>צומחים | חינוך פיננסי ושוק ההון לנוער</title>
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>צומחים | קורס שוק ההון וחינוך פיננסי לבני נוער</title>
+    <meta name="description" content="קורס שוק ההון מעשי לבני 12–16: ריבית דריבית, DCA, מניות, קרנות סל, אג״ח וניתוח טכני. 10 מפגשים של 75 דקות, תיק דמה בלי כסף אמיתי, ושיעור ראשון בחינם." />
+    <meta name="keywords" content="קורס שוק ההון לנוער, חינוך פיננסי לילדים, קורס השקעות לבני נוער, ריבית דריבית, DCA, קרנות סל, חוג כלכלה, צומחים" />
+    <link rel="canonical" href="https://www.tzomchim.co.il/" />
+    <meta name="theme-color" content="#0F5132" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="tzomchim-logo-icon.png">
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:site_name" content="צומחים" />
+    <meta property="og:title" content="צומחים – תגרמו לכסף שלכם לעבוד במקומכם" />
+    <meta property="og:description" content="קורס שוק ההון לבני נוער. 10 מפגשים, תיק דמה, ושיעור ראשון בחינם." />
+    <meta property="og:url" content="https://www.tzomchim.co.il/" />
+    <meta property="og:image" content="https://www.tzomchim.co.il/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Google Fonts: Rubik -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Rubik:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- AOS (Animate On Scroll) CDN -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Rubik', 'sans-serif'],
-                    },
-                    colors: {
-                        flyer: {
-                            bg: '#f8faf7',
-                            cardBg: '#ffffff',
-                            darkGreen: '#0e4125',
-                            mediumGreen: '#155e37',
-                            mintBg: '#d0f2e3',
-                            mintLight: '#e3f6ed',
-                            turquoise: '#00c49f',
-                            orange: '#f25c2a',
-                            orangeLight: '#ff7a45',
-                            creamBg: '#fcfbf7',
-                            peach: '#fde8df',
-                            purple: '#8b5cf6',
-                        }
-                    },
-                    boxShadow: {
-                        'soft': '0 10px 30px -5px rgba(14, 65, 37, 0.08)',
-                        'flyer-card': '0 15px 35px -5px rgba(14, 65, 37, 0.12)',
-                        'orange-glow': '0 8px 25px rgba(242, 92, 42, 0.25)'
-                    }
-                }
-            }
-        }
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "EducationalOrganization",
+            "@id": "https://www.tzomchim.co.il/#org",
+            "name": "צומחים – חינוך פיננסי לנוער",
+            "url": "https://www.tzomchim.co.il/",
+            "logo": "https://www.tzomchim.co.il/favicon.svg",
+            "telephone": "+972-58-427-2333",
+            "areaServed": "IL",
+            "founder": [{ "@type": "Person", "name": "יאיר" }, { "@type": "Person", "name": "אריה" }]
+          },
+          {
+            "@type": "Course",
+            "name": "צומחים – קורס שוק ההון לבני נוער",
+            "description": "10 מפגשים של 75 דקות: ריבית דריבית ו-DCA, אינפלציה, מניות ומדדים, קרנות סל ואג״ח, פסיכולוגיה של משקיעים, מאקרו ודוחות, השקעה בפועל וניתוח טכני בסיסי.",
+            "inLanguage": "he",
+            "educationalLevel": "גילאי 12–16",
+            "provider": { "@id": "https://www.tzomchim.co.il/#org" },
+            "offers": { "@type": "Offer", "price": "1000", "priceCurrency": "ILS", "category": "Paid", "availability": "https://schema.org/InStock" },
+            "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "onsite", "courseWorkload": "PT12H30M" }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              { "@type": "Question", "name": "צריך כסף כדי להשתתף?", "acceptedAnswer": { "@type": "Answer", "text": "לא. כל ההשקעות בקורס נעשות בתיק דמה, בלי כסף אמיתי." } },
+              { "@type": "Question", "name": "מה קורה אחרי שיעור הניסיון?", "acceptedAnswer": { "@type": "Answer", "text": "אם ממשיכים, הקורס המלא עולה 1,000 ₪ לכל 10 המפגשים. אם לא, לא משלמים כלום." } },
+              { "@type": "Question", "name": "זה ייעוץ השקעות?", "acceptedAnswer": { "@type": "Answer", "text": "לא. צומחים הוא קורס חינוכי ואינו ממליץ על ניירות ערך." } }
+            ]
+          }
+        ]
+      }
     </script>
-
-    <style>
-        body {
-            font-family: 'Rubik', sans-serif;
-            background-color: #f8faf7;
-            color: #1a2e22;
-        }
-
-        /* Hero Mint Organic Radial Gradient */
-        .hero-flyer-bg {
-            background: radial-gradient(circle at 15% 20%, #d0f2e3 0%, #edf9f3 50%, #f8faf7 90%);
-        }
-
-        /* Custom Range Slider */
-        input[type=range] {
-            accent-color: #f25c2a;
-        }
-    </style>
-</head>
-<body class="antialiased selection:bg-flyer-orange selection:text-white">
-
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-emerald-900/10 shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Brand Logo (Original Color Version) -->
-            <a href="#" class="flex items-center gap-3 group">
-                <img src="tzomchim-logo.png" alt="צומחים - חינוך פיננסי לנוער" class="h-10 sm:h-12 w-auto group-hover:scale-105 transition-transform duration-300">
-            </a>
-
-            <!-- Target Audience Badge & CTA -->
-            <div class="flex items-center gap-4">
-                <div class="hidden sm:flex items-center gap-2 bg-flyer-peach/80 border border-flyer-orange/20 text-flyer-orange px-4 py-1.5 rounded-full text-xs font-bold">
-                    <span class="w-2 h-2 rounded-full bg-flyer-orange animate-pulse"></span>
-                    גילאי 12–16 · 10 מפגשים
-                </div>
-                <a href="#register" class="bg-flyer-orange hover:bg-orange-600 text-white font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-orange-glow transition-all hover:scale-105">
-                    נרשמים עכשיו
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- HERO SECTION (Light Theme, Text RIGHT, Phone LEFT) -->
-    <section class="hero-flyer-bg border-b border-emerald-900/10 py-12 md:py-24 relative overflow-hidden">
-        
-        <!-- Background Soft Shapes -->
-        <div class="absolute top-10 right-10 w-72 h-72 bg-flyer-peach/50 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-10 left-20 w-80 h-80 bg-flyer-mintBg/60 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-            
-            <!-- RIGHT SIDE: Headline, Subtitle & Primary CTAs -->
-            <div class="lg:col-span-7 text-right space-y-6" data-aos="fade-left" data-aos-duration="900">
-                
-                <div class="inline-flex items-center gap-2 bg-white/80 border border-emerald-900/10 px-4 py-2 rounded-2xl text-xs font-bold text-flyer-mediumGreen shadow-sm backdrop-blur-sm">
-                    <span class="w-2 h-2 rounded-full bg-flyer-turquoise"></span>
-                    <span>קורס שוק ההון המעשי של בני נוער</span>
-                </div>
-
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-flyer-darkGreen leading-[1.12] tracking-tight">
-                    תגרמו לכסף שלכם<br>
-                    <span class="text-flyer-orange inline-block mt-1">לעבוד במקומכם.</span>
-                </h1>
-
-                <p class="text-lg sm:text-xl text-slate-700 font-medium leading-relaxed max-w-2xl">
-                    קורס שוק ההון שמדבר בשפה של בני נוער: גרפים חיים, נתוני אמת וסימולציות. בלי נוסחאות מפחידות ועם ליגת תיקי דמה ללא סיכון כספי!
-                </p>
-
-                <!-- Instructors Highlight Box -->
-                <div class="bg-white/95 p-5 rounded-2xl border border-emerald-900/10 shadow-soft max-w-xl flex items-center gap-4">
-                    <div class="flex -space-x-3 space-x-reverse shrink-0">
-                        <div class="w-13 h-13 rounded-full border-2 border-white bg-flyer-darkGreen text-white flex items-center justify-center font-black text-base shadow-sm">
-                            י
-                        </div>
-                        <div class="w-13 h-13 rounded-full border-2 border-white bg-flyer-orange text-white flex items-center justify-center font-black text-base shadow-sm">
-                            א
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="font-black text-flyer-darkGreen text-base">
-                            יאיר (19) ואריה (17) · צעירים. מנוסים. בדיוק כמוכם.
-                        </h3>
-                        <p class="text-xs sm:text-sm text-slate-600 mt-0.5">
-                            מעל 4 שנות ניסיון בשוק ההון. כל תלמיד יוצא מהקורס עם תיק השקעות אישי שבנה בעצמו.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- CTA Action Buttons -->
-                <div class="pt-3 flex flex-wrap gap-4 items-center">
-                    <a href="#register" class="bg-flyer-orange hover:bg-orange-600 text-white font-black text-base sm:text-lg px-8 py-4 rounded-2xl shadow-orange-glow transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-3">
-                        <span>נרשמים עכשיו לקבוצה הראשונה</span>
-                        <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </a>
-                    <a href="#simulator" class="bg-white hover:bg-slate-50 text-flyer-darkGreen font-bold text-base px-6 py-4 rounded-2xl transition-all border border-emerald-900/15 shadow-sm inline-flex items-center gap-2">
-                        <span>⏱️ התחרות נגד הזמן</span>
-                    </a>
-                </div>
-
-            </div>
-
-            <!-- LEFT SIDE: Phone Portfolio Mockup -->
-            <div class="lg:col-span-5 flex justify-center" data-aos="fade-right" data-aos-duration="900">
-                <div class="relative w-full max-w-[330px]">
-                    
-                    <!-- Decorative Background Circle -->
-                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-flyer-peach/60 rounded-full blur-2xl"></div>
-
-                    <!-- Phone Frame -->
-                    <div class="bg-white border-4 border-slate-900 rounded-[42px] p-5 shadow-flyer-card relative z-10">
-                        
-                        <!-- Phone Notch -->
-                        <div class="w-24 h-4 bg-slate-900 rounded-b-xl mx-auto mb-4"></div>
-
-                        <div class="flex justify-between items-center text-xs text-slate-500 mb-2">
-                            <span class="font-bold text-slate-700">התיק שלי</span>
-                            <span class="bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-bold">להמחשה</span>
-                        </div>
-
-                        <div class="text-xs text-slate-400 font-medium">שווי התיק</div>
-                        <div class="flex items-baseline justify-between mt-1 mb-3">
-                            <span class="text-3xl font-black text-slate-900 tracking-tight">₪974,000</span>
-                            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                                ▲ 18.4%
-                            </span>
-                        </div>
-
-                        <!-- Live Interactive Canvas Chart -->
-                        <div class="h-32 w-full mb-4">
-                            <canvas id="heroMockupChart"></canvas>
-                        </div>
-
-                        <!-- Asset Distribution -->
-                        <div class="space-y-2 text-xs">
-                            <div class="text-slate-500 font-bold mb-1">הפוזיציות שלי</div>
-                            
-                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 border border-slate-100">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
-                                    <span class="font-bold text-slate-700">S&P 500</span>
-                                </div>
-                                <span class="font-black text-purple-700">40%</span>
-                            </div>
-
-                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 border border-slate-100">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
-                                    <span class="font-bold text-slate-700">NASDAQ 100</span>
-                                </div>
-                                <span class="font-black text-teal-600">25%</span>
-                            </div>
-
-                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 border border-slate-100">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
-                                    <span class="font-bold text-slate-700">ת"א 125</span>
-                                </div>
-                                <span class="font-black text-sky-600">20%</span>
-                            </div>
-
-                            <div class="flex justify-between items-center p-2 rounded-xl bg-slate-50 border border-slate-100">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                                    <span class="font-bold text-slate-700">אג"ח ממשלתי</span>
-                                </div>
-                                <span class="font-black text-amber-600">15%</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- INTERACTIVE SECTION: "תחרות נגד הזמן" -->
-    <section id="simulator" class="py-16 sm:py-24 bg-white border-b border-emerald-900/10">
-        <div class="max-w-6xl mx-auto px-6">
-            
-            <div class="text-center max-w-3xl mx-auto mb-14" data-aos="fade-up">
-                <span class="text-flyer-orange font-bold text-xs uppercase bg-orange-50 px-3.5 py-1.5 rounded-full border border-orange-200">
-                    סימולטור אינטראקטיבי
-                </span>
-                <h2 class="text-3xl sm:text-5xl font-black text-flyer-darkGreen mt-3">
-                    תחרות נגד הזמן ⏱️
-                </h2>
-                <p class="text-slate-600 text-base sm:text-lg mt-2">
-                    שחקו עם הנתונים וגלו מה קורה למי שמתחיל להשקיע בגיל 15 לעומת מי שממתין רק 5 שנים עד גיל 20!
-                </p>
-            </div>
-
-            <!-- Interactive Calculator Container -->
-            <div class="bg-flyer-bg rounded-3xl p-6 sm:p-10 border border-emerald-900/10 shadow-soft grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" data-aos="zoom-in">
-                
-                <!-- Sliders Control Panel -->
-                <div class="lg:col-span-5 space-y-6 text-right">
-                    
-                    <!-- Slider 1: Monthly Deposit -->
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center text-sm font-bold">
-                            <span class="text-slate-700">הפקדה חודשית:</span>
-                            <span class="text-flyer-orange text-lg font-black" id="monthlyVal">₪500</span>
-                        </div>
-                        <input type="range" id="monthlyInput" min="100" max="2000" step="100" value="500" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                    </div>
-
-                    <!-- Slider 2: Average Annual Return -->
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center text-sm font-bold">
-                            <span class="text-slate-700">תשואה שנתית ממוצעת:</span>
-                            <span class="text-flyer-orange text-lg font-black" id="returnVal">9%</span>
-                        </div>
-                        <input type="range" id="returnInput" min="4" max="14" step="0.5" value="9" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                    </div>
-
-                    <!-- Summary Comparison Cards -->
-                    <div class="grid grid-cols-2 gap-4 pt-2">
-                        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-right">
-                            <span class="text-[11px] font-bold text-emerald-800 block">התחלה בגיל 15 (בגיל 50)</span>
-                            <span class="text-xl sm:text-2xl font-black text-flyer-darkGreen block mt-1" id="earlyTotal">₪1,340,000</span>
-                        </div>
-                        <div class="p-4 rounded-2xl bg-orange-50 border border-orange-200 text-right">
-                            <span class="text-[11px] font-bold text-flyer-orange block">המתנה לגיל 20 (בגיל 50)</span>
-                            <span class="text-xl sm:text-2xl font-black text-slate-700 block mt-1" id="lateTotal">₪820,000</span>
-                        </div>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-medium">
-                        💡 <strong>המסקנה:</strong> המתנה של 5 שנים בלבד עלולה לעלות בלמעלה מ-500,000 ₪ של תשואה בגלל אפקט הריבית דריבית!
-                    </div>
-
-                </div>
-
-                <!-- Dynamic Chart Canvas -->
-                <div class="lg:col-span-7 h-72 sm:h-96 w-full">
-                    <canvas id="timeRaceChart"></canvas>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- DETAILED COURSE SYLLABUS / MODULES -->
-    <section class="py-16 sm:py-24 max-w-7xl mx-auto px-6">
-        
-        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-            <span class="text-flyer-darkGreen font-bold text-xs uppercase bg-emerald-100/80 px-3.5 py-1.5 rounded-full border border-emerald-200">
-                המסלול המלא
-            </span>
-            <h2 class="text-3xl sm:text-5xl font-black text-flyer-darkGreen mt-3">
-                מה לומדים ב-10 המפגשים? 📚
-            </h2>
-            <p class="text-slate-600 text-base sm:text-lg mt-2">
-                בלי נוסחאות מפחידות. כל מפגש בנוי מחומר תיאורטי קצר ותרגול מעשי על גרפים חיים.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Module 1 -->
-            <div class="bg-white p-8 rounded-3xl border border-emerald-900/10 shadow-soft hover:shadow-flyer-card transition-all" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-4xl mb-4">🚀</div>
-                <span class="text-xs font-bold text-flyer-darkGreen bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">מפגשים 1–2</span>
-                <h3 class="text-2xl font-black text-flyer-darkGreen mt-3 mb-2">הזמן הוא הכוח שלכם</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    איך עובדת הבורסה? כוחה הנסתר של הריבית דריבית, אסטרטגיית DCA (השקעה עקבית), ומה ההבדל בין חיסכון בבנק להשקעה במדד S&P 500.
-                </p>
-            </div>
-
-            <!-- Module 2 -->
-            <div class="bg-white p-8 rounded-3xl border border-emerald-900/10 shadow-soft hover:shadow-flyer-card transition-all" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-4xl mb-4">📊</div>
-                <span class="text-xs font-bold text-flyer-darkGreen bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">מפגשים 3–4</span>
-                <h3 class="text-2xl font-black text-flyer-darkGreen mt-3 mb-2">מה קונים בבורסה?</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    הבנת העולם של מניות, קרנות סל (ETFs), אג"ח ממשלתי וקונצרני, ואיך עובד מנגנון הדיבידנדים.
-                </p>
-            </div>
-
-            <!-- Module 3 -->
-            <div class="bg-white p-8 rounded-3xl border border-emerald-900/10 shadow-soft hover:shadow-flyer-card transition-all" data-aos="fade-up" data-aos-delay="300">
-                <div class="text-4xl mb-4">🧠</div>
-                <span class="text-xs font-bold text-flyer-orange bg-orange-50 px-3 py-1 rounded-full border border-orange-200">מפגשים 5–6</span>
-                <h3 class="text-2xl font-black text-flyer-darkGreen mt-3 mb-2">הראש של המשקיע</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    פסיכולוגיית מסחר, התמודדות עם משברים בשווקים, פיזור סיכונים נכון והימנעות מהטיות קוגניטיביות שמפסידות כסף.
-                </p>
-            </div>
-
-            <!-- Module 4 -->
-            <div class="bg-white p-8 rounded-3xl border border-emerald-900/10 shadow-soft hover:shadow-flyer-card transition-all" data-aos="fade-up" data-aos-delay="400">
-                <div class="text-4xl mb-4">🌍</div>
-                <span class="text-xs font-bold text-flyer-orange bg-orange-50 px-3 py-1 rounded-full border border-orange-200">מפגשים 7–8</span>
-                <h3 class="text-2xl font-black text-flyer-darkGreen mt-3 mb-2">נתוני מאקרו ודוחות</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    איך קוראים דוח כספי של חברה? הבנת מדד המחירים לצרכן (CPI), האינפלציה, שער הדולר ומכפיל רווח (P/E).
-                </p>
-            </div>
-
-            <!-- Module 5 -->
-            <div class="bg-white p-8 rounded-3xl border border-emerald-900/10 shadow-soft hover:shadow-flyer-card transition-all" data-aos="fade-up" data-aos-delay="500">
-                <div class="text-4xl mb-4">📈</div>
-                <span class="text-xs font-bold text-flyer-darkGreen bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">מפגש 9</span>
-                <h3 class="text-2xl font-black text-flyer-darkGreen mt-3 mb-2">ניתוח טכני בסיסי</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    שימוש מקצועי ב-TradingView, קריאת נרות יפניים, זיהוי מגמות, קווי תמיכה והתנגדות ונפח מסחר (Volume).
-                </p>
-            </div>
-
-            <!-- Module 6 -->
-            <div class="bg-gradient-to-br from-emerald-50 to-white p-8 rounded-3xl border border-emerald-300 shadow-soft hover:shadow-flyer-card transition-all" data-aos="fade-up" data-aos-delay="600">
-                <div class="text-4xl mb-4">🛡️</div>
-                <span class="text-xs font-bold text-flyer-darkGreen bg-emerald-200/80 px-3 py-1 rounded-full">מפגש 10</span>
-                <h3 class="text-2xl font-black text-flyer-darkGreen mt-3 mb-2">משקיעים בפועל והגנה</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    הכרת עמלות, פקודות Limit/Stop-Loss, זיהוי עוקצים והונאות ברשתות החברתיות, וסיום ליגת תיקי הדמה!
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- INSTRUCTORS SECTION -->
-    <section class="py-16 sm:py-20 bg-white border-y border-emerald-900/10">
-        <div class="max-w-6xl mx-auto px-6">
-            
-            <div class="text-center max-w-3xl mx-auto mb-14" data-aos="fade-up">
-                <span class="text-flyer-darkGreen font-bold text-xs uppercase bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200">
-                    הצוות המוביל
-                </span>
-                <h2 class="text-3xl sm:text-5xl font-black text-flyer-darkGreen mt-3">
-                    מי מעביר את הקורס?
-                </h2>
-                <p class="text-slate-600 text-base sm:text-lg mt-2">
-                    מדריכים קרובים בגיל לתלמידים, שמדברים בשפה שלהם וחיים את השוק יום-יום.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                
-                <!-- Yair Hilell -->
-                <div class="bg-flyer-bg p-8 rounded-3xl border border-emerald-900/10 hover:shadow-flyer-card transition-all text-right relative overflow-hidden" data-aos="fade-left">
-                    <div class="absolute top-0 right-0 w-2 h-full bg-flyer-darkGreen"></div>
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-16 h-16 rounded-2xl bg-flyer-darkGreen text-white font-black text-2xl flex items-center justify-center shadow-md shrink-0">
-                            י
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-black text-flyer-darkGreen">יאיר הלל</h3>
-                            <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-lg border border-emerald-200 mt-1">
-                                בן 19 · סוחר ומשקיע בשוק ההון
-                            </span>
-                        </div>
-                    </div>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        בוגר הישיבה התיכונית חספין ותלמיד מכינה קדם-צבאית. סוחר פעיל בשוק ההון מעל 4 שנים, מתמחה במסחר סווינג, אינדיקטורים טכניים וקריאת גרפים ב-TradingView. מביא איתו תשוקה ענקית לחינוך פיננסי מעשי לנוער.
-                    </p>
-                </div>
-
-                <!-- Aryeh Zagdanski -->
-                <div class="bg-flyer-bg p-8 rounded-3xl border border-emerald-900/10 hover:shadow-flyer-card transition-all text-right relative overflow-hidden" data-aos="fade-right">
-                    <div class="absolute top-0 right-0 w-2 h-full bg-flyer-orange"></div>
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-16 h-16 rounded-2xl bg-flyer-orange text-white font-black text-2xl flex items-center justify-center shadow-md shrink-0">
-                            א
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-black text-flyer-darkGreen">אריה זגדנסקי</h3>
-                            <span class="inline-block bg-orange-100 text-flyer-orange text-xs font-bold px-3 py-1 rounded-lg border border-orange-200 mt-1">
-                                בן 17 · חוקר כלכלה ומאקרו
-                            </span>
-                        </div>
-                    </div>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        סוחר ומשקיע בשוק ההון מעל 4 שנים. מתמחה בניתוח נתוני מאקרו-כלכלה, השקעות ארוכות טווח, בניית תיקי השקעות מפוזרים והבנת מדדים עולמיים.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- FOOTER / REGISTRATION SECTION -->
-    <footer id="register" class="py-16 max-w-6xl mx-auto px-6">
-        
-        <div class="bg-flyer-darkGreen text-white p-8 sm:p-14 rounded-3xl shadow-2xl relative overflow-hidden grid grid-cols-1 md:grid-cols-12 gap-8 items-center" data-aos="zoom-in">
-            
-            <!-- Left/Main Info -->
-            <div class="md:col-span-8 space-y-4 text-center md:text-right">
-                <img src="tzomchim-logo-white.png" alt="צומחים" class="h-12 w-auto mb-3 mx-auto md:mx-0">
-                
-                <h3 class="text-3xl sm:text-5xl font-black text-white leading-tight">
-                    נרשמים עכשיו לקבוצה הראשונה
-                </h3>
-                
-                <p class="text-emerald-100 text-base sm:text-lg flex flex-wrap items-center justify-center md:justify-start gap-3 pt-1">
-                    <span class="flex items-center gap-1.5">
-                        📅 פתיחה: <strong>15.10.2026</strong>
-                    </span>
-                    <span>·</span>
-                    <span class="flex items-center gap-1.5">
-                        📍 <strong>חספין, מרכז חדשנות</strong>
-                    </span>
-                </p>
-            </div>
-
-            <!-- Contact & WhatsApp Buttons -->
-            <div class="md:col-span-4 flex flex-col gap-3.5">
-                <a href="https://wa.me/972584272333" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-4 px-6 rounded-2xl text-center flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-105">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                    <span>058-4272333 (יאיר)</span>
-                </a>
-
-                <a href="https://wa.me/972553184575" target="_blank" class="bg-emerald-900/90 hover:bg-emerald-800 text-emerald-100 font-bold py-4 px-6 rounded-2xl text-center flex items-center justify-center gap-2 border border-emerald-700 transition-all">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                    <span>055-3184575 (אריה)</span>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="text-center text-xs text-slate-500 mt-8">
-            © 2026 צומחים - חינוך פיננסי ושוק ההון לנוער. הקורס הינו לצרכים חינוכיים בלבד ואינו מהווה ייעוץ השקעות.
-        </div>
-
-    </footer>
-
-    <!-- SCRIPTS -->
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-        });
-
-        // 1. Hero Mockup Chart
-        const heroCtx = document.getElementById('heroMockupChart').getContext('2d');
-        const heroGradient = heroCtx.createLinearGradient(0, 0, 0, 120);
-        heroGradient.addColorStop(0, 'rgba(0, 196, 159, 0.4)');
-        heroGradient.addColorStop(1, 'rgba(0, 196, 159, 0.0)');
-
-        new Chart(heroCtx, {
-            type: 'line',
-            data: {
-                labels: ['1', '2', '3', '4', '5', '6', '7'],
-                datasets: [{
-                    data: [820000, 840000, 830000, 890000, 880000, 930000, 974000],
-                    borderColor: '#00c49f',
-                    borderWidth: 3,
-                    fill: true,
-                    backgroundColor: heroGradient,
-                    tension: 0.4,
-                    pointRadius: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: { x: { display: false }, y: { display: false } }
-            }
-        });
-
-        // 2. Interactive "Time Race" Simulator Logic
-        const monthlyInput = document.getElementById('monthlyInput');
-        const returnInput = document.getElementById('returnInput');
-        const monthlyVal = document.getElementById('monthlyVal');
-        const returnVal = document.getElementById('returnVal');
-        const earlyTotal = document.getElementById('earlyTotal');
-        const lateTotal = document.getElementById('lateTotal');
-
-        const raceCtx = document.getElementById('timeRaceChart').getContext('2d');
-
-        let raceChart = new Chart(raceCtx, {
-            type: 'line',
-            data: { labels: [], datasets: [] },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: { intersect: false, mode: 'index' },
-                plugins: {
-                    legend: {
-                        labels: { color: '#0e4125', font: { family: 'Rubik', size: 12, weight: 'bold' } }
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: { color: 'rgba(14, 65, 37, 0.06)' },
-                        ticks: { color: '#475569', font: { family: 'Rubik' } }
-                    },
-                    y: {
-                        grid: { color: 'rgba(14, 65, 37, 0.06)' },
-                        ticks: {
-                            color: '#475569',
-                            font: { family: 'Rubik' },
-                            callback: value => '₪' + (value / 1000).toLocaleString() + 'k'
-                        }
-                    }
-                }
-            }
-        });
-
-        function calculateCompoundInterest() {
-            const P = parseFloat(monthlyInput.value);
-            const annualRate = parseFloat(returnInput.value) / 100;
-            const monthlyRate = annualRate / 12;
-
-            monthlyVal.innerText = '₪' + P.toLocaleString();
-            returnVal.innerText = (annualRate * 100).toFixed(1) + '%';
-
-            let labels = [];
-            let earlyData = [];
-            let lateData = [];
-
-            let totalEarly = 0;
-            let totalLate = 0;
-
-            for (let age = 15; age <= 50; age++) {
-                labels.push('גיל ' + age);
-
-                let monthsEarly = (age - 15) * 12;
-                if (monthsEarly === 0) {
-                    totalEarly = 0;
-                } else {
-                    totalEarly = P * ((Math.pow(1 + monthlyRate, monthsEarly) - 1) / monthlyRate);
-                }
-                earlyData.push(Math.round(totalEarly));
-
-                if (age < 20) {
-                    lateData.push(0);
-                } else {
-                    let monthsLate = (age - 20) * 12;
-                    if (monthsLate === 0) {
-                        totalLate = 0;
-                    } else {
-                        totalLate = P * ((Math.pow(1 + monthlyRate, monthsLate) - 1) / monthlyRate);
-                    }
-                    lateData.push(Math.round(totalLate));
-                }
-            }
-
-            earlyTotal.innerText = '₪' + Math.round(totalEarly).toLocaleString();
-            lateTotal.innerText = '₪' + Math.round(totalLate).toLocaleString();
-
-            raceChart.data = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'התחלה בגיל 15 (מחזור הקורס הקרוב)',
-                        data: earlyData,
-                        borderColor: '#0e4125',
-                        backgroundColor: 'rgba(14, 65, 37, 0.08)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.3
-                    },
-                    {
-                        label: 'המתנה לגיל 20 (דחייה של 5 שנים)',
-                        data: lateData,
-                        borderColor: '#f25c2a',
-                        backgroundColor: 'rgba(242, 92, 42, 0.05)',
-                        borderWidth: 2,
-                        borderDash: [5, 5],
-                        fill: false,
-                        tension: 0.3
-                    }
-                ]
-            };
-            raceChart.update();
-        }
-
-        monthlyInput.addEventListener('input', calculateCompoundInterest);
-        returnInput.addEventListener('input', calculateCompoundInterest);
-
-        calculateCompoundInterest();
-    </script>
-</body>
+  </head>
+  <body>
+    <div id="root">
+      <!-- תוכן סטטי למנועי חיפוש ולמי שהסקריפטים כבויים אצלו. React מחליף אותו בטעינה. -->
+      <main>
+        <h1>צומחים – קורס שוק ההון וחינוך פיננסי לבני נוער</h1>
+        <p>10 מפגשים של 75 דקות שבהם בני נוער לומדים להשקיע באמת: ריבית דריבית ו-DCA, אינפלציה ובורסה, מניות ומדדים, קרנות סל ואג״ח, פסיכולוגיה של משקיעים, מאקרו ודוחות, השקעה בפועל וזיהוי הונאות, וניתוח טכני בסיסי ב-TradingView.</p>
+        <p>שיעור ניסיון ראשון בחינם. הקורס המלא: 1,000 ₪. מעבירים: יאיר (19) ואריה (17), משקיעים בשוק ההון יותר מ-4 שנים. טלפון: 058-4272333, 055-3184575.</p>
+        <p>התוכן חינוכי בלבד ואינו מהווה ייעוץ השקעות.</p>
+      </main>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
