@@ -11,12 +11,12 @@ export const BRAND = {
     { name: 'אריה', display: '055-3184575', intl: '972553184575' },
   ],
   whatsappQr: 'https://wa.me/qr/E6ADQLZXOYDVD1',
-  // פרטים משפטיים – יש להשלים לפני העלייה לאוויר
-  legalName: '[שם העוסק המלא]',
-  businessId: '[מספר עוסק]',
-  address: '[כתובת למשלוח דואר]',
-  email: '[כתובת דוא"ל ליצירת קשר]',
-  a11yCoordinator: '[שם רכז/ת הנגישות]',
+  // פרטים משפטיים. businessId ו-address מוצגים באתר רק אם ממלאים אותם
+  legalName: 'צומחים – יאיר ואריה',
+  businessId: '', // יעודכן אחרי פתיחת תיק עוסק
+  address: '',
+  email: 'yair8798@gmail.com',
+  a11yCoordinator: 'יאיר',
   siteUrl: 'https://www.tzomchim.co.il',
   updated: '18.10.2026',
 };
