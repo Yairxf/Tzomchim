@@ -4,7 +4,6 @@ import Hero from './components/Hero.jsx';
 import Twins from './components/Twins.jsx';
 import Simulator from './components/Simulator.jsx';
 import Path from './components/Path.jsx';
-import League from './components/League.jsx';
 import Pricing from './components/Pricing.jsx';
 import About from './components/About.jsx';
 import Register from './components/Register.jsx';
@@ -53,7 +52,6 @@ export default function App() {
           <Twins />
           <Simulator />
           <Path />
-          <League />
           <Pricing />
           <About />
           <Register />
