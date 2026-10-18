@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BRAND, waLink } from '../data.js';
 
-const GRADES = ['ו׳', 'ז׳', 'ח׳', 'ט׳', 'י׳', 'י״א'];
+const GRADES = ['י׳', 'י״א', 'י״ב', 'סיימתי תיכון'];
 const SOURCES = ['וואטסאפ', 'פלאייר', 'בית הספר / מתנ״ס', 'חבר/ה', 'אינסטגרם', 'אחר'];
 const empty = { parentName: '', phone: '', email: '', childName: '', grade: '', place: '', source: '', notes: '', terms: false, contact: false, photos: false, marketing: false, company: '' };
 
@@ -28,18 +28,18 @@ export default function Register() {
 
   const summary = () => [
     'הרשמה לשיעור ניסיון – צומחים',
-    `הורה: ${f.parentName}`, `טלפון: ${f.phone}`, f.email && `מייל: ${f.email}`,
-    `תלמיד/ה: ${f.childName} · כיתה ${f.grade}`, `יישוב / בית ספר: ${f.place}`,
+    `איש קשר: ${f.parentName}`, `טלפון: ${f.phone}`, f.email && `מייל: ${f.email}`,
+    `משתתף/ת: ${f.childName} · ${f.grade}`, `יישוב / בית ספר: ${f.place}`,
     f.source && `איך שמעו עלינו: ${f.source}`, f.notes && `הערות: ${f.notes}`,
     `אישור צילום: ${f.photos ? 'כן' : 'לא'}`,
   ].filter(Boolean).join('\n');
 
   const validate = () => {
     const e = {};
-    if (f.parentName.trim().length < 2) e.parentName = 'נא למלא שם מלא של ההורה.';
+    if (f.parentName.trim().length < 2) e.parentName = 'נא למלא שם מלא.';
     if (!phoneOk(f.phone)) e.phone = 'נא למלא מספר טלפון ישראלי, למשל 050-1234567.';
     if (f.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) e.email = 'כתובת המייל לא תקינה.';
-    if (f.childName.trim().length < 2) e.childName = 'נא למלא את שם התלמיד/ה.';
+    if (f.childName.trim().length < 2) e.childName = 'נא למלא את שם המשתתף/ת.';
     if (!f.grade) e.grade = 'נא לבחור כיתה.';
     if (f.place.trim().length < 2) e.place = 'נא למלא יישוב או בית ספר.';
     if (!f.terms) e.terms = 'כדי להירשם יש לאשר את התקנון ומדיניות הפרטיות.';
@@ -96,9 +96,9 @@ export default function Register() {
             </div>
           ) : (
             <form onSubmit={submit} noValidate className="flex flex-col gap-5" aria-describedby="req-note">
-              <p id="req-note" className="text-sm text-muted">שדות המסומנים ב-<span className="text-ember">*</span> הם חובה. את הטופס ממלא/ת ההורה או האפוטרופוס.</p>
+              <p id="req-note" className="text-sm text-muted">שדות המסומנים ב-<span className="text-ember">*</span> הם חובה. מתחת לגיל 18 את הטופס ממלא/ת הורה או אפוטרופוס. מעל 18 אפשר למלא לבד, עם אותם פרטים בשני החלקים.</p>
               <fieldset className="grid sm:grid-cols-2 gap-4">
-                <legend className="font-display font-bold text-forest text-lg mb-2">פרטי ההורה</legend>
+                <legend className="font-display font-bold text-forest text-lg mb-2">פרטי ההורה / איש הקשר</legend>
                 <Field id="r-parentName" label="שם מלא" required error={err.parentName}>
                   <input id="r-parentName" className={inputCls} value={f.parentName} onChange={set('parentName')} autoComplete="name" aria-invalid={!!err.parentName} aria-describedby={desc('parentName')} />
                 </Field>
@@ -112,8 +112,8 @@ export default function Register() {
                 </div>
               </fieldset>
               <fieldset className="grid sm:grid-cols-2 gap-4">
-                <legend className="font-display font-bold text-forest text-lg mb-2">פרטי התלמיד/ה</legend>
-                <Field id="r-childName" label="שם התלמיד/ה" required error={err.childName}>
+                <legend className="font-display font-bold text-forest text-lg mb-2">פרטי המשתתף/ת</legend>
+                <Field id="r-childName" label="שם המשתתף/ת" required error={err.childName}>
                   <input id="r-childName" className={inputCls} value={f.childName} onChange={set('childName')} aria-invalid={!!err.childName} aria-describedby={desc('childName')} />
                 </Field>
                 <Field id="r-grade" label="כיתה" required error={err.grade}>

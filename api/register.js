@@ -48,7 +48,7 @@ export default async function handler(req, res) {
     `הורה: ${d.parentName}`,
     `טלפון: ${d.phone}`,
     d.email && `מייל: ${d.email}`,
-    `תלמיד/ה: ${d.childName} · כיתה ${d.grade}`,
+    `משתתף/ת: ${d.childName} · ${d.grade}`,
     `יישוב / בית ספר: ${d.place}`,
     d.source && `איך שמעו: ${d.source}`,
     d.notes && `הערות: ${d.notes}`,

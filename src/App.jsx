@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
-import Twins from './components/Twins.jsx';
 import Simulator from './components/Simulator.jsx';
 import Path from './components/Path.jsx';
 import Pricing from './components/Pricing.jsx';
@@ -13,7 +12,7 @@ import { Terms, Privacy, Accessibility } from './components/Legal.jsx';
 
 const PAGES = { terms: Terms, privacy: Privacy, accessibility: Accessibility };
 const TITLES = { terms: 'תקנון ותנאי שימוש', privacy: 'מדיניות פרטיות', accessibility: 'הצהרת נגישות' };
-const HOME_TITLE = 'צומחים | קורס שוק ההון וחינוך פיננסי לבני נוער';
+const HOME_TITLE = 'צומחים | קורס שוק ההון לבני 16–18 – למתחילים ולמתקדמים';
 
 const currentPage = () => {
   const h = (typeof window !== 'undefined' ? window.location.hash : '').replace('#', '');
@@ -49,7 +48,6 @@ export default function App() {
       {Page ? <Page /> : (
         <main id="main">
           <Hero />
-          <Twins />
           <Simulator />
           <Path />
           <Pricing />

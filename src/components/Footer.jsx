@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="gutter mx-auto max-w-6xl py-14 grid md:grid-cols-[1.3fr_1fr_1fr] gap-10">
         <div className="flex flex-col gap-4 min-w-0">
           <Logo size={44} light />
-          <p className="text-mint leading-relaxed max-w-sm">קורס שוק ההון לבני נוער: ריבית דריבית, השקעה חודשית, קרנות סל, ניתוח טכני וזיהוי הונאות. מתחילים מוקדם, צומחים בגדול.</p>
+          <p className="text-mint leading-relaxed max-w-sm">קורס שוק ההון לבני 16–18, למתחילים ולמתקדמים: ריבית דריבית, השקעה חודשית, קרנות סל, ניתוח טכני וזיהוי הונאות. מתחילים מוקדם, צומחים בגדול.</p>
         </div>
         <div className="flex flex-col gap-2">
           <b className="font-display text-lg mb-1">יצירת קשר</b>
@@ -26,7 +26,7 @@ export default function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="gutter mx-auto max-w-6xl py-5 flex flex-col md:flex-row gap-3 justify-between text-sm text-mint/80">
-          <p>© 2026 צומחים – חינוך פיננסי לנוער. כל הזכויות שמורות.</p>
+          <p>© 2026 צומחים – קורס שוק ההון. כל הזכויות שמורות.</p>
           <p className="max-w-2xl">התוכן באתר ובקורס הוא חינוכי בלבד ואינו מהווה ייעוץ השקעות, שיווק השקעות או המלצה לפעולה בניירות ערך. סימולציות ותיקי דמה מוצגים להמחשה בלבד.</p>
         </div>
       </div>

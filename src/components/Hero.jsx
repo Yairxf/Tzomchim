@@ -1,4 +1,4 @@
-import Portfolio from './Portfolio.jsx';
+import Market from './Market.jsx';
 import { BRAND, TICKER } from '../data.js';
 
 function Ticker() {
@@ -42,8 +42,8 @@ export default function Hero() {
             </span>
           </h1>
           <p className="text-[18px] sm:text-[19px] leading-[1.7] text-ink/85 max-w-[34em]">
-            צומחים הוא קורס שבו בני נוער לומדים להשקיע באמת: לבנות תיק לטווח ארוך, להשקיע כל חודש בשיטת DCA,
-            לקרוא גרף ולזהות הונאה לפני שהיא עולה כסף. עם גרפים חיים, נתוני אמת ותיק דמה, בלי כסף אמיתי ובלי סיכון.
+            קורס שוק ההון למתחילים ולמתקדמים: מהבסיס של ריבית דריבית, קרנות סל ואג״ח, דרך דוחות ומאקרו,
+            ועד קריאת גרף, ווליום ופקודות כמו סוחר. עם גרפים חיים, נתוני אמת ותיק דמה, בלי כסף אמיתי ובלי סיכון.
           </p>
           <div className="flex flex-wrap gap-3">
             <a href="#register" className="inline-flex items-center gap-2 rounded-full bg-ember text-white px-7 py-3.5 text-[17px] font-bold shadow-[0_10px_24px_rgba(255,107,74,.35)] hover:bg-[#B23A23] transition">
@@ -66,7 +66,7 @@ export default function Hero() {
         </div>
 
         <div className="relative min-w-0">
-          <Portfolio />
+          <Market />
           <a href="#register" className="absolute -top-5 -left-3 sm:-left-6 w-[108px] h-[108px] rounded-full bg-[radial-gradient(circle_at_40%_35%,#E8603F,#C8432A)] text-white grid place-items-center text-center rotate-[-14deg] shadow-[0_0_0_4px_#fff,0_0_0_7px_#0F5132,0_14px_28px_rgba(255,107,74,.35)] hover:rotate-[-4deg] transition-transform" aria-label="שיעור ראשון חינם – להרשמה">
             <span className="leading-tight">
               <span className="block text-[12px] font-bold">שיעור ראשון</span>
