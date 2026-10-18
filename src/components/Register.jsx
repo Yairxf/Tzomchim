@@ -23,7 +23,7 @@ const inputCls = 'w-full rounded-2xl border-2 border-sand bg-paper px-4 py-3 tex
 export default function Register() {
   const [f, setF] = useState(empty);
   const [err, setErr] = useState({});
-  const [state, setState] = useState('idle'); // idle | sending | done | fallback
+  const [state, setState] = useState('idle'); // idle | done
   const set = (k) => (e) => setF({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
 
   const summary = () => [
@@ -57,14 +57,12 @@ export default function Register() {
       return;
     }
     if (f.company) { setState('done'); return; } // honeypot
-    setState('sending');
-    try {
-      const res = await fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...f, sentAt: new Date().toISOString() }) });
-      if (!res.ok) throw new Error('bad status');
-      setState('done');
-    } catch {
-      setState('fallback');
-    }
+    // ההרשמה נשלחת מהוואטסאפ של הנרשם אלינו, עם כל הפרטים כבר כתובים. בלי שרת ובלי API.
+    const url = waLink(BRAND.phones[0].intl, summary());
+    const w = window.open(url, '_blank');
+    if (w) w.opener = null;
+    else window.location.href = url; // דפדפן שחסם חלון חדש
+    setState('done');
   };
 
   const desc = (k) => (err[k] ? `r-${k}-err` : undefined);
@@ -91,8 +89,10 @@ export default function Register() {
           {state === 'done' ? (
             <div className="flex flex-col items-center text-center gap-4 py-10" role="status">
               <svg width="72" height="72" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#0F5132" /><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              <h3 className="font-display font-extrabold text-[28px] text-forest">ההרשמה התקבלה</h3>
-              <p className="text-[17px] text-ink/80 max-w-md">תודה {f.parentName.split(' ')[0]}! נחזור אליכם בקרוב עם כל הפרטים על שיעור הניסיון של {f.childName}.</p>
+              <h3 className="font-display font-extrabold text-[28px] text-forest">כמעט סיימנו!</h3>
+              <p className="text-[17px] text-ink/80 max-w-md">פתחנו לכם וואטסאפ עם כל הפרטים. נשאר רק <b>ללחוץ על שליחה</b>, ונחזור אליכם עם היום, השעה והמקום של שיעור הניסיון.</p>
+              <a href={waLink(BRAND.phones[0].intl, summary())} target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-full bg-[#1E7A4C] text-white font-bold px-6 py-3 hover:bg-forest transition-colors">הוואטסאפ לא נפתח? לחצו כאן</a>
+              <span className="text-sm text-muted">או התקשרו: <span className="num select-all" dir="ltr">{BRAND.phones[0].display}</span></span>
             </div>
           ) : (
             <form onSubmit={submit} noValidate className="flex flex-col gap-5" aria-describedby="req-note">
@@ -161,18 +161,13 @@ export default function Register() {
                 ))}
               </fieldset>
 
-              {state === 'fallback' && (
-                <div className="rounded-2xl border-2 border-coral bg-[#FFF4F0] p-4 flex flex-col gap-3" role="alert">
-                  <b>לא הצלחנו לשלוח את הטופס אוטומטית.</b>
-                  <span className="text-[15px]">אפשר לשלוח לנו את אותם פרטים בוואטסאפ בלחיצה אחת, או להתקשר: <span className="num select-all" dir="ltr">{BRAND.phones[0].display}</span></span>
-                  <a href={waLink(BRAND.phones[0].intl, summary())} target="_blank" rel="noopener" className="self-start rounded-full bg-[#25D366] text-white font-bold px-5 py-2.5">שליחת הפרטים בוואטסאפ</a>
-                </div>
-              )}
-
-              <button type="submit" disabled={state === 'sending'} className="rounded-full bg-ember text-white font-display font-extrabold text-[19px] py-4 shadow-[0_12px_26px_rgba(255,107,74,.35)] hover:bg-[#B23A23] disabled:opacity-60 transition">
-                {state === 'sending' ? 'שולחים…' : 'שמירת מקום בשיעור הניסיון'}
+              <button type="submit" className="rounded-full bg-ember text-white font-display font-extrabold text-[19px] py-4 shadow-[0_12px_26px_rgba(255,107,74,.35)] hover:bg-[#B23A23] disabled:opacity-60 transition">
+                <span className="inline-flex items-center justify-center gap-2.5">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z" /></svg>
+                  שליחת ההרשמה בוואטסאפ
+                </span>
               </button>
-              <p className="text-xs text-muted leading-relaxed">הפרטים משמשים רק לתיאום הקורס ולא יועברו לגורם שלישי למטרות שיווק. פרטים נוספים ב<a href="#privacy" className="underline">מדיניות הפרטיות</a>.</p>
+              <p className="text-xs text-muted leading-relaxed">בלחיצה ייפתח וואטסאפ עם הפרטים, ונשאר רק לשלוח. הפרטים משמשים רק לתיאום הקורס ולא יועברו לגורם שלישי למטרות שיווק. פרטים נוספים ב<a href="#privacy" className="underline">מדיניות הפרטיות</a>.</p>
             </form>
           )}
         </div>
