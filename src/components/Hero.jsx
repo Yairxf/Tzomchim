@@ -1,4 +1,4 @@
-import Scene3D from './Scene3D.jsx';
+import Portfolio from './Portfolio.jsx';
 import { BRAND, TICKER } from '../data.js';
 
 function Ticker() {
@@ -66,24 +66,7 @@ export default function Hero() {
         </div>
 
         <div className="relative min-w-0">
-          <div className="relative aspect-[1/0.92] w-full max-w-full rounded-[36px] overflow-hidden bg-mint grid-paper shadow-[0_30px_60px_-20px_rgba(15,81,50,.35)]">
-            <div className="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-[radial-gradient(circle,#FFF3DC,transparent_70%)]" aria-hidden="true" />
-            <Scene3D className="absolute inset-0" />
-            <div className="absolute top-4 right-4 floaty rounded-2xl bg-paper/95 backdrop-blur px-4 py-3 shadow-lg border border-white flex items-center gap-3">
-              <span className="w-9 h-9 rounded-xl bg-[#FFF1C7] grid place-items-center" aria-hidden="true">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#B45309" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z" /><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3" /></svg>
-              </span>
-              <span className="leading-tight">
-                <b className="block text-[14px]">ליגת צומחים</b>
-                <span className="text-[12.5px] text-muted">התיק שלך עלה למקום 1</span>
-              </span>
-            </div>
-            <div className="absolute bottom-4 left-4 rounded-2xl bg-forest text-cream px-4 py-3 shadow-lg" style={{ animationDelay: '1.2s' }}>
-              <span className="block text-[12px] text-mint">ריבית דריבית</span>
-              <b className="font-display text-[20px] num" dir="ltr">+18.4%</b>
-              <span className="block text-[11px] text-mint/80">תיק דמה · להמחשה</span>
-            </div>
-          </div>
+          <Portfolio />
           <a href="#register" className="absolute -top-5 -left-3 sm:-left-6 w-[108px] h-[108px] rounded-full bg-[radial-gradient(circle_at_40%_35%,#E8603F,#C8432A)] text-white grid place-items-center text-center rotate-[-14deg] shadow-[0_0_0_4px_#fff,0_0_0_7px_#0F5132,0_14px_28px_rgba(255,107,74,.35)] hover:rotate-[-4deg] transition-transform" aria-label="שיעור ראשון חינם – להרשמה">
             <span className="leading-tight">
               <span className="block text-[12px] font-bold">שיעור ראשון</span>

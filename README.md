@@ -1,7 +1,7 @@
 # צומחים – אתר
 
-אתר React + Tailwind CSS 4 + three.js, בנוי עם Vite. כולל:
-סצנת תלת-ממד בראש העמוד, סימולטור ריבית דריבית, מסלול 10 המפגשים, ליגת תיקי דמה, מחיר, עלינו, שאלות נפוצות,
+אתר React + Tailwind CSS 4, בנוי עם Vite. כולל:
+תיק השקעות דמה חי בראש העמוד שגדל עם הגלילה, סימולטור ריבית דריבית, מסלול 10 המפגשים, מחיר, עלינו, שאלות נפוצות,
 טופס הרשמה ששולח לכם מייל + וואטסאפ, תפריט נגישות, ודפי תקנון, פרטיות והצהרת נגישות.
 
 ## הרצה מקומית
@@ -51,5 +51,5 @@ index.html            SEO: תגיות meta, Open Graph, JSON-LD (ארגון, ק�
 api/register.js       פונקציית ההרשמה (מייל + וואטסאפ)
 public/               favicon, תמונת שיתוף, robots.txt, sitemap.xml, תוכנית הקורס PDF
 src/data.js           כל הטקסטים, המחירים והפרטים העסקיים
-src/components/       Hero + Scene3D (three.js), Twins, Simulator, Path, League, Pricing, About, Register, Footer, A11y, Legal
+src/components/       Hero + Portfolio (תיק דמה חי), Twins, Simulator, Path, Pricing, About, Register, Footer, A11y, Legal
 ```
