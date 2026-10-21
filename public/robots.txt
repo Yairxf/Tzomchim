@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://www.tzomchim.co.il/sitemap.xml
+Sitemap: https://tzmchim.vercel.app/sitemap.xml
