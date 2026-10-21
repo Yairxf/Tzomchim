@@ -397,3 +397,162 @@
     });
   }
 })();
+
+/* ===================================================== market scenery ==
+   Depth layers in the hero, scroll-driven ticker tape, drawn icons, the
+   ledger trace, and the bottom rail that records the visit as one line.  */
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var stillNow = function () { return reduce || root.classList.contains('still'); };
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }; }
+
+  /* far plane: a quiet field of quotes */
+  var far = document.querySelector('.depth__far');
+  if (far) {
+    var r = rng(9137), syms = ['SPY', 'QQQ', 'TA125', 'USD/ILS', 'VTI', 'BOND', 'ETF', 'EPS', 'P/E', 'DCA', 'VOL', 'CPI'], lines = [];
+    for (var i = 0; i < 34; i++) {
+      var row = '';
+      for (var k = 0; k < 9; k++) { var up = r() > 0.42; row += syms[Math.floor(r() * syms.length)] + ' ' + (up ? '▲' : '▼') + (r() * 2).toFixed(2) + '     '; }
+      lines.push(row);
+    }
+    far.textContent = lines.join('\n');
+  }
+
+  /* mid plane: one big market silhouette */
+  var mid = document.querySelector('.depth__mid');
+  if (mid) {
+    var rr = rng(4421), pts = [], v = 300;
+    for (var x = 0; x <= 1440; x += 24) {
+      v += (rr() - 0.43) * 42 - (x > 980 ? 9 : 0);
+      v = clamp(v, 60, 420);
+      pts.push([x, v]);
+    }
+    var d = pts.map(function (p, j) { return (j ? 'L' : 'M') + p[0] + ' ' + p[1].toFixed(1); }).join(' ');
+    mid.querySelector('.depth__line').setAttribute('d', d);
+    mid.querySelector('.depth__area').setAttribute('d', d + ' L1440 520 L0 520 Z');
+  }
+
+  /* ticker tape content */
+  var TERMS = [['S&P 500', 1], ['נאסד״ק 100', 1], ['ת״א 125', 0], ['ריבית דריבית', 1], ['DCA', 1], ['אינפלציה', 0], ['קרנות סל', 1], ['אג״ח', 0],
+    ['דיבידנד', 1], ['מכפיל רווח', 1], ['Magnificent 7', 1], ['פיזור', 1], ['שקל-דולר', 0], ['ווליום', 1], ['Stop Loss', 0], ['נרות יפניים', 1]];
+  var tapes = Array.prototype.slice.call(document.querySelectorAll('[data-tape]'));
+  tapes.forEach(function (t, n) {
+    var html = '';
+    for (var rep = 0; rep < 4; rep++) TERMS.forEach(function (q, j) {
+      var up = (q[1] + rep + n + j) % 3 !== 0;
+      html += '<span><i class="' + (up ? 'up' : 'down') + '">' + (up ? '▲' : '▼') + '</i>' + q[0] + '</span>';
+    });
+    t.innerHTML = html;
+  });
+
+  /* drawn icons and illustrations, once on entry */
+  var drawables = document.querySelectorAll('.ledger__row, .desk__intro');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-drawn'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    Array.prototype.forEach.call(drawables, function (el) { io.observe(el); });
+  } else Array.prototype.forEach.call(drawables, function (el) { el.classList.add('is-drawn'); });
+
+  /* ledger trace */
+  var lt = document.querySelector('[data-ledger-trace]'), ltPath, ltDot, ltLen = 0;
+  if (lt) {
+    ltPath = lt.querySelector('path'); ltDot = lt.querySelector('circle');
+    var r3 = rng(2026), dd = 'M30 0', xx = 30;
+    for (var y = 40; y <= 1000; y += 40) { xx = clamp(xx + (r3() - 0.55) * 22, 6, 54); dd += ' L' + xx.toFixed(1) + ' ' + y; }
+    ltPath.setAttribute('d', dd);
+    ltLen = ltPath.getTotalLength();
+    ltPath.style.strokeDasharray = ltLen; ltPath.style.strokeDashoffset = ltLen;
+  }
+
+  /* bottom rail: the visit as a market line */
+  var rail = document.querySelector('[data-rail]'), marks = document.querySelector('[data-rail-marks]');
+  var railLive, railDot, railLen = 0, railGeom = null;
+  var ACTS = [['open', 'שוק'], ['time', 'זמן'], ['alert', ''], ['crash', 'משבר'], ['path', 'מסלול'], ['desk', 'צוות'], ['account', 'חשבון'], ['ticket', 'הרשמה']];
+  function buildRail() {
+    if (!rail) return;
+    var W = rail.clientWidth || innerWidth, H = 30;
+    rail.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var docH = document.documentElement.scrollHeight - innerHeight;
+    var bounds = ACTS.map(function (a) { var el = document.getElementById(a[0]); return el ? Math.max(0, el.getBoundingClientRect().top + scrollY - innerHeight * 0.4) / docH : 0; });
+    var r4 = rng(311), N = 260, pts = [];
+    for (var i = 0; i <= N; i++) {
+      var f = i / N, s = 0;
+      while (s < bounds.length - 1 && f >= bounds[s + 1]) s++;
+      var a0 = bounds[s], a1 = s < bounds.length - 1 ? bounds[s + 1] : 1, lp = (f - a0) / Math.max(a1 - a0, 1e-6);
+      var base = [0.45 + lp * 0.12, 0.57 + Math.pow(lp, 2.2) * 0.3, 0.87 - lp * 0.05, lp < 0.4 ? 0.82 - lp * 1.05 : 0.4 + (lp - 0.4) * 0.85, 0.91 + lp * 0.02, 0.93 + lp * 0.02, 0.95 + lp * 0.02, 0.97 + lp * 0.02][s];
+      var val = clamp(base + (r4() - 0.5) * 0.05, 0.03, 1);
+      pts.push([f * (W - 8) + 4, H - 2 - val * (H - 4)]);
+    }
+    var d = pts.map(function (p, j) { return (j ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' ');
+    rail.querySelector('.rail__ghost').setAttribute('d', d);
+    railLive = rail.querySelector('.rail__live'); railDot = rail.querySelector('.rail__dot');
+    railLive.setAttribute('d', d);
+    railLen = railLive.getTotalLength();
+    railLive.style.strokeDasharray = railLen;
+    railGeom = { pts: pts, docH: docH };
+    if (marks) {
+      marks.innerHTML = '';
+      ACTS.forEach(function (a, j) {
+        if (!a[1]) return;
+        var sp = document.createElement('span'); sp.textContent = a[1];
+        sp.style.left = (bounds[j] * 100 + 1.2) + '%'; sp.dataset.at = bounds[j];
+        marks.appendChild(sp);
+      });
+    }
+  }
+
+  /* pointer drift for the near plane */
+  var mx = 0, my = 0, tx = 0, ty = 0;
+  if (fine) addEventListener('pointermove', function (e) { tx = (e.clientX / innerWidth - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2; }, { passive: true });
+
+  var layers = Array.prototype.slice.call(document.querySelectorAll('[data-depth]'));
+  var hero = document.getElementById('open');
+  var tapeW = tapes.map(function (t) { return t.scrollWidth / 4; });
+  var lastY = -1, lastMx = 9;
+  function tick() {
+    var y = scrollY, still = stillNow();
+    mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
+    var moved = Math.abs(y - lastY) > 0.5 || Math.abs(mx - lastMx) > 0.002;
+    if (moved) {
+      lastY = y; lastMx = mx;
+      if (!still && hero && y < hero.offsetHeight + innerHeight) {
+        layers.forEach(function (el) {
+          var rate = +el.getAttribute('data-depth'), drift = +(el.getAttribute('data-drift') || 0);
+          el.style.transform = 'translate3d(' + (mx * drift).toFixed(1) + 'px,' + (y * rate + my * drift * 0.6).toFixed(1) + 'px,0)';
+        });
+      }
+      tapes.forEach(function (t, i) {
+        var dir = +t.getAttribute('data-tape'), w = tapeW[i] || 1;
+        var off = still ? 0 : ((y * 0.45) % w);
+        t.style.transform = 'translate3d(' + (dir > 0 ? off - w : -off) + 'px,0,0)';
+      });
+      if (ltPath) {
+        var sh = document.querySelector('.ledger-shell').getBoundingClientRect();
+        var p = clamp((innerHeight * 0.7 - sh.top) / sh.height, 0, 1);
+        if (still) p = 1;
+        ltPath.style.strokeDashoffset = (ltLen * (1 - p)).toFixed(1);
+        var pt = ltPath.getPointAtLength(ltLen * p);
+        ltDot.setAttribute('cx', pt.x); ltDot.setAttribute('cy', pt.y);
+      }
+      if (railGeom) {
+        var rp = clamp(y / Math.max(railGeom.docH, 1), 0, 1);
+        railLive.style.strokeDashoffset = (railLen * (1 - rp)).toFixed(1);
+        var q = railLive.getPointAtLength(railLen * rp);
+        railDot.setAttribute('cx', q.x); railDot.setAttribute('cy', q.y);
+        if (marks) Array.prototype.forEach.call(marks.children, function (m) { m.classList.toggle('is-past', rp >= +m.dataset.at); });
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  function rebuild() { tapeW = tapes.map(function (t) { return t.scrollWidth / 4; }); buildRail(); lastY = -1; }
+  addEventListener('resize', rebuild);
+  addEventListener('load', rebuild);
+  setTimeout(rebuild, 600);
+  rebuild();
+  requestAnimationFrame(tick);
+})();

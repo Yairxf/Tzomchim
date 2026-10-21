@@ -69,3 +69,13 @@ Honesty rule: every panel computes from data arrays in the page, and each one sa
 | 8 Order ticket | pin (span 1.25) | The page stops moving and hands over an input. |
 
 Device families: flow/in, pin, reveal, pointer, plus custom --sc-p logic. No family runs twice in a row. Grounds are painted per section, with hard edges and no drift.
+
+## Revision 1 (user feedback, 21.10.2026)
+- "I want the colours from the first site: brown-orange." The page is now cream, forest and ember. Data panels stay dark-forest islands, as the hero card was on the first site.
+- "More scroll effect, a capital-market effect, data, illustrations everywhere." Added:
+  - hero depth: a far field of quotes, a mid market silhouette, and near floating tickers and coins, each at a different scroll rate plus pointer drift;
+  - two scroll-driven ticker tapes;
+  - per-session icons that draw themselves, with a price trace running down the ledger;
+  - a desk illustration with candles that grow;
+  - a coin stack that rises as the statement prints;
+  - a fixed bottom rail that draws the whole visit as one market line, with act markers.
